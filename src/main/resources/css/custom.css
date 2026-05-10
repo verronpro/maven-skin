@@ -1,4 +1,4 @@
-/* maven-skin3 — adapted from the Caring-Coder Jekyll blog */
+/* maven-skin — adapted from the Caring-Coder Jekyll blog */
 :root {
     /* Brand & theme tokens */
     --cc-primary: rgba(0, 120, 0); /* CRT green */
@@ -457,14 +457,10 @@ a.poweredBy img {
     margin-top: 0;
 }
 
-.post-edit {
-    margin-bottom: 1rem;
+.post-edit-link {
+    margin-top: 1rem;
     text-align: right;
-}
-
-.post-edit .btn {
-    font-size: .85rem;
-    padding: .25rem .6rem;
+    font-size: .9rem;
 }
 
 /* Doxia sections — collapsed visual, but keep semantics */
@@ -617,27 +613,31 @@ pre.source {
 
 /* Doxia generic body table — used by most project-info-reports */
 table.bodyTable {
-    border-collapse: collapse;
     width: 100%;
+    border-collapse: collapse;
     margin: 1rem 0;
 }
 
 table.bodyTable th,
 table.bodyTable td {
+    padding: .5rem .75rem;
     border: 1px solid var(--cc-border);
-    padding: .4rem .6rem;
+    text-align: left;
+    vertical-align: top;
 }
 
 table.bodyTable th {
-    background: var(--cc-surface);
-    text-align: left;
+    background: rgba(17, 24, 39, .04);
 }
 
 table.bodyTable tr.a { background: rgba(17, 24, 39, .02); }
 table.bodyTable tr.b { background: transparent; }
 
 @media (prefers-color-scheme: dark) {
-    table.bodyTable tr.a { background: rgba(255, 255, 255, .03); }
+    table.bodyTable th {
+        background: rgba(255, 255, 255, .04);
+    }
+    table.bodyTable tr.a { background: rgba(255, 255, 255, .02); }
 }
 
 /* Surefire test report rows */
@@ -738,7 +738,7 @@ img.imageLink {
         background: #fff;
     }
 
-    .btn, nav, header, footer, .site-header, .site-footer, .home-sidebar, .breadcrumbs, .post-edit {
+    .btn, nav, header, footer, .site-header, .site-footer, .home-sidebar, .breadcrumbs, .post-edit-link {
         display: none !important;
     }
 

@@ -281,3 +281,35 @@
     <script defer src="$relativePath/js/diagrams.js"></script>
 #**##end
 #end
+##
+## Open Graph and Twitter Card tags
+#macro ( openGraph )
+#**##if ( $project.name )
+    <meta property="og:site_name" content="$project.name"/>
+#**##end
+    <meta property="og:title" content="$title"/>
+    <meta property="og:type" content="website"/>
+#**##if ( $cleanDesc )
+    <meta property="og:description" content="$cleanDesc"/>
+#**##elseif ( $project.description )
+#*  *##set( $cleanDesc = $project.description.replaceAll('[\r\n]+', ' ').replace('"', '').trim() )
+    <meta property="og:description" content="$cleanDesc"/>
+#**##end
+#**##if ( $project.url )
+    <meta property="og:url" content="$project.url/$alignedFileName"/>
+    <link rel="canonical" href="$project.url/$alignedFileName"/>
+#**##end
+#**##set( $logoEl = $decoration.custom.getChild( 'logo' ) )
+#**##if( $logoEl )
+#*  *##set( $logoSrc = $logoEl.getValue() )
+#*  *##if( !$decoration.isLink( $logoSrc ) && $project.url )
+#*    *##set( $logoSrc = $project.url + "/" + $logoSrc )
+#*  *##end
+    <meta property="og:image" content="$logoSrc"/>
+#**##end
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:title" content="$title"/>
+#**##if ( $cleanDesc )
+    <meta name="twitter:description" content="$cleanDesc"/>
+#**##end
+#end

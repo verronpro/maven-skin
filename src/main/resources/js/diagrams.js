@@ -1,4 +1,4 @@
-/* maven-skin3 — diagrams.js
+/* maven-skin — diagrams.js
  * Renders ```mermaid```, ```plantuml```, ```dot``` fenced code blocks as diagrams.
  * Mermaid runs locally; PlantUML/Graphviz go to Kroki via deflate+base64url (Pako).
  * Click a rendered diagram to zoom.

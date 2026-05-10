@@ -12,6 +12,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <title>$title</title>
+#**##if( $project.description )
+#*  *##set( $cleanDesc = $project.description.replaceAll('[\r\n]+', ' ').replace('"', '').trim() )
+    <meta name="description" content="$cleanDesc"/>
+#**##end
     <link rel="stylesheet" href="$relativePath/css/custom.css" type="text/css" media="all"/>
 #foreach( $author in $authors )
     <meta name="author" content="$author"/>
@@ -29,10 +33,11 @@
 #if( $decoration.body.head )
 #**#$render.eval( $decoration.body.head )
 #end
-    $headContent
+    $!headContent
 #**##googleAnalytics()
 #**##ahrefsAnalytics()
 #**##diagramScripts()
+#**##openGraph()
   </head>
   <body class="layout-doc">
     <a class="skip-link" href="#main">Skip to content</a>
@@ -70,12 +75,13 @@
 
       <div class="home-grid">
         <article class="home-main post-content">
+#*   *#$bodyContent
 #if( $decoration.edit && $docRenderingContext.editable )
-          <div class="post-edit">
-            <a class="btn btn-ghost" href="$docRenderingContext.getDoxiaSourcePath( $decoration.edit )">Edit this page</a>
+#**##set( $editUrl = $docRenderingContext.getDoxiaSourcePath( $decoration.edit ).replaceFirst( "\.git/", "/blob/main/" ) )
+          <div class="post-edit-link">
+            <a href="$editUrl">Edit this page</a>
           </div>
 #end
-#*   *#$bodyContent
         </article>
 
         <aside class="home-sidebar" aria-label="Sidebar">
