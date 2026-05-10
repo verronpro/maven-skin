@@ -1,0 +1,283 @@
+## Generic link macro: renders an <a> with the right class for external links.
+#macro ( link $href $name $target $img $position $alt $border $width $height $title )
+#**##set ( $linkTitle = ' title="' + $name + '"' )
+#**##if( $target )
+#*  *##set ( $linkTarget = ' target="' + $target + '"' )
+#**##else
+#*  *##set ( $linkTarget = "" )
+#**##end
+#**##if ( $decoration.isLink( $href ) )
+#*  *##set ( $linkClass = ' class="externalLink"' )
+#**##else
+#*  *##set ( $linkClass = "" )
+#**##end
+#**##if ( $img )
+#*  *##if ( $position == "left" )
+#*    *#<a href="$href"$linkClass$linkTarget$linkTitle>#image( $img $alt $border $width $height $title ) $name</a>##
+#*  *##else
+#*    *#<a href="$href"$linkClass$linkTarget$linkTitle>$name #image( $img $alt $border $width $height $title )</a>##
+#*  *##end
+#**##else
+#*  *#<a href="$href"$linkClass$linkTarget$linkTitle>$name</a>##
+#**##end
+#end
+##
+#macro ( image $img $alt $border $width $height $title )
+#**##if( $img )
+#*  *##if ( !$decoration.isLink( $img ) )
+#*    *##set ( $imgSrc = $PathTool.calculateLink( $img, $relativePath ) )
+#*    *##set ( $imgSrc = $imgSrc.replaceAll( '\\', '/' ) )
+#*    *##set ( $imgSrc = ' src="' + $imgSrc + '"' )
+#*  *##else
+#*    *##set ( $imgSrc = ' src="' + $img + '"' )
+#*  *##end
+#*  *##if( $alt )
+#*    *##set ( $imgAlt = ' alt="' + $alt + '"' )
+#*  *##else
+#*    *##set ( $imgAlt = ' alt=""' )
+#*  *##end
+#*  *##if( $width )
+#*    *##set ( $imgWidth = ' width="' + $width + '"' )
+#*  *##else
+#*    *##set ( $imgWidth = "" )
+#*  *##end
+#*  *##if( $height )
+#*    *##set ( $imgHeight = ' height="' + $height + '"' )
+#*  *##else
+#*    *##set ( $imgHeight = "" )
+#*  *##end
+#*  *##if( $title )
+#*    *##set ( $imgTitle = ' title="' + $title + '"' )
+#*  *##else
+#*    *##set ( $imgTitle = "" )
+#*  *##end
+#*  *#<img$imgSrc$imgAlt$imgWidth$imgHeight$imgTitle/>##
+#**##end
+#end
+##
+## Top-right links from <body><links> in site.xml — rendered as primary horizontal nav.
+#macro ( headerLinks $links )
+#**##if ( $links )
+#*  *##foreach( $item in $links )
+#*    *##set ( $href = $PathTool.calculateLink( $item.href, $relativePath ).replaceAll( '\\', '/' ) )
+#*    *##if ( $decoration.isLink( $item.href ) )
+#*      *#<a class="externalLink" href="$href"#if( $item.target ) target="$item.target"#end>$item.name</a>
+#*    *##else
+#*      *#<a href="$href">$item.name</a>
+#*    *##end
+#*  *##end
+#**##end
+#end
+##
+## Breadcrumbs — emits a chain of links + the current page's short title.
+#macro ( breadcrumbs $breadcrumbs )
+#**##foreach( $item in $breadcrumbs )
+#*  *##set ( $currentItemHref = $PathTool.calculateLink( $item.href, $relativePath ).replaceAll( '\\', '/' ) )
+#*  *##if ( ( $currentItemHref == '' ) )
+#*    *##set ( $currentItemHref = './' )
+#*  *##end
+#*  *##link( $currentItemHref $item.name $item.target $item.img $item.position $item.alt $item.border $item.width $item.height $item.title )
+#**# &gt;
+#**##end
+#**#<span class="crumb-current">$shortTitle</span>
+#end
+##
+## Tree walker used to decide whether a parent menu should be expanded
+## (because one of its descendants is the current page).
+#macro ( displayTree $display $item )
+#**##if ( $item && $item.items && $item.items.size() > 0 )
+#*  *##foreach( $subitem in $item.items )
+#*    *##set ( $subitemHref = $PathTool.calculateLink( $subitem.href, $relativePath ).replaceAll( '\\', '/' ) )
+#*    *##if ( $alignedFileName == $subitemHref )
+#*      *##set ( $display = true )
+#*    *##end
+#*    *##displayTree( $display $subitem )
+#*  *##end
+#**##end
+#end
+##
+## Single menu item: renders <li> with `active` class when it's the current page,
+## and recursively descends into nested items.
+#macro ( menuItem $item )
+#**##set ( $collapse = "none" )
+#**##set ( $currentItemHref = $PathTool.calculateLink( $item.href, $relativePath ).replaceAll( '\\', '/' ) )
+##
+#**##if ( $item && $item.items && $item.items.size() > 0 )
+#*  *##if ( $item.collapse == false )
+#*    *##set ( $collapse = "expanded" )
+#*  *##else
+#*    *##set ( $collapse = "collapsed" )
+#*  *##end
+#*  *##set ( $display = false )
+#*  *##displayTree( $display $item )
+#*  *##if ( $alignedFileName == $currentItemHref || $display )
+#*    *##set ( $collapse = "expanded" )
+#*  *##end
+#**##end
+##
+#**##if ( $alignedFileName == $currentItemHref )
+#*  *#<li class="$collapse active"><span class="active-link">$item.name</span>##
+#**##else
+#*  *#<li class="$collapse">#link( $currentItemHref $item.name $item.target $item.img $item.position $item.alt $item.border $item.width $item.height $item.title )##
+#**##end
+#**##if ( $item && $item.items && $item.items.size() > 0 && $collapse == "expanded" )
+      <ul>
+#*  *##foreach( $subitem in $item.items )
+#*    *##menuItem( $subitem )
+#*  *##end
+      </ul>
+#**##end
+  </li>
+#end
+##
+## Renders all <menu> blocks from site.xml as a stack of sidebar cards.
+#macro ( mainMenu $menus )
+#**##foreach( $menu in $menus )
+#*  *##if ( $menu.name && $menu.items && $menu.items.size() > 0 )
+        <nav class="card sidebar-menu" aria-label="$menu.name">
+          <h3>$menu.name</h3>
+          <ul class="sidebar-nav">
+#*    *##foreach( $item in $menu.items )
+#*      *##menuItem( $item )
+#*    *##end
+          </ul>
+        </nav>
+#*  *##end
+#**##end
+#end
+##
+## "Last published / version" sidebar card — driven by site.xml's <publishDate/> and <version/>.
+#macro ( publishVersionCard )
+#**##set ( $hasPublish = ( $decoration.publishDate && $decoration.publishDate.position && !$decoration.publishDate.position.equalsIgnoreCase( "none" ) ) )
+#**##set ( $hasVersion = ( $decoration.version && $decoration.version.position && !$decoration.version.position.equalsIgnoreCase( "none" ) ) )
+#**##if ( $hasPublish || $hasVersion )
+#*  *##if ( $publishDate )
+#*    *##set ( $dateValue = $dateFormat.format( $publishDate ) )
+#*  *##else
+#*    *##set ( $dateValue = $dateFormat.format( $currentDate ) )
+#*  *##end
+        <div class="card sidebar-meta">
+          <h3>Project</h3>
+          <ul class="list-compact">
+#*  *##if ( $hasVersion )
+            <li><span class="muted">Version:</span> <span id="projectVersion">${project.version}</span></li>
+#*  *##end
+#*  *##if ( $hasPublish )
+            <li><span class="muted">Last published:</span> <span id="publishDate">$dateValue</span></li>
+#*  *##end
+          </ul>
+        </div>
+#**##end
+#end
+##
+#macro ( copyright )
+#**##if ( $project )
+#*  *##if ( ${project.organization} && ${project.organization.name} )
+#*    *##set ( $period = "" )
+#*  *##else
+#*    *##set ( $period = "." )
+#*  *##end
+#*  *##set ( $currentYear = ${currentDate.year} + 1900 )
+#*  *##if ( ${project.inceptionYear} && ( ${project.inceptionYear} != ${currentYear.toString()} ) )
+      ${project.inceptionYear}&#x2013;${currentYear}${period}##
+#*  *##else
+      ${currentYear}${period}##
+#*  *##end
+#*  *##if ( ${project.organization} )
+#*    *##if ( ${project.organization.name} && ${project.organization.url} )
+#*      *# <a href="$project.organization.url">${project.organization.name}</a>.
+#*    *##elseif ( ${project.organization.name} )
+#*      *#${project.organization.name}.
+#*    *##end
+#*  *##end
+#**##end
+#end
+##
+## "Powered by" footer logo. Falls back to the Maven feather if site.xml has no <poweredBy> entry.
+#macro ( poweredByLogo $poweredBy )
+#**##if( $poweredBy && !$poweredBy.isEmpty() )
+#*  *##foreach ( $item in $poweredBy )
+#*    *##if( $item.href )
+#*      *##set ( $href = $PathTool.calculateLink( $item.href, $relativePath ).replaceAll( '\\', '/' ) )
+#*    *##else
+#*      *##set ( $href = "https://maven.apache.org/" )
+#*    *##end
+#*    *##if( $item.name )
+#*      *##set ( $name = $item.name )
+#*    *##else
+#*      *##set ( $name = "Maven" )
+#*    *##end
+#*    *##if( $item.img )
+#*      *##set ( $img = $item.img )
+#*    *##else
+#*      *##set ( $img = "images/logos/maven-feather.png" )
+#*    *##end
+#*    *##if ( !$decoration.isLink( $img ) )
+#*      *##set ( $img = $PathTool.calculateLink( $img, $relativePath ).replaceAll( '\\', '/' ) )
+#*    *##end
+          <a class="poweredBy" href="$href" title="$name"><img src="$img" alt="$name"/></a>
+#*  *##end
+#**##else
+          <a class="poweredBy" href="https://maven.apache.org/" title="Built by Maven"><img src="$relativePath/images/logos/maven-feather.png" alt="Built by Maven"/></a>
+#**##end
+#end
+##
+## Google Analytics — enabled via <custom><analytics><googleAnalyticsId>G-XXX</googleAnalyticsId></analytics></custom> in site.xml.
+## Falls back to legacy <googleAnalyticsAccountId> in site.xml for back-compat.
+#macro ( googleAnalytics )
+#**##set ( $analyticsEl = $decoration.custom.getChild( 'analytics' ) )
+#**##set ( $gaId = false )
+#**##if ( $analyticsEl )
+#*  *##set ( $gaIdEl = $analyticsEl.getChild( 'googleAnalyticsId' ) )
+#*  *##if ( $gaIdEl ) #set ( $gaId = $gaIdEl.getValue() ) #end
+#**##end
+#**##if ( !$gaId && $decoration.googleAnalyticsAccountId && $decoration.googleAnalyticsAccountId != "" )
+#*  *##set ( $gaId = $decoration.googleAnalyticsAccountId )
+#**##end
+#**##if ( $gaId )
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=$gaId"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', '$gaId');
+    </script>
+#**##end
+#end
+##
+## Ahrefs analytics — enabled via <custom><analytics><ahrefsKey>...</ahrefsKey></analytics></custom>.
+#macro ( ahrefsAnalytics )
+#**##set ( $analyticsEl = $decoration.custom.getChild( 'analytics' ) )
+#**##if ( $analyticsEl )
+#*  *##set ( $ahrefsEl = $analyticsEl.getChild( 'ahrefsKey' ) )
+#*  *##if ( $ahrefsEl )
+    <script async src="https://analytics.ahrefs.com/analytics.js" data-key="$ahrefsEl.getValue()"></script>
+#*  *##end
+#**##end
+#end
+##
+## Diagram rendering scripts — Mermaid + Pako (for Kroki). Disable via
+## <custom><diagrams><enabled>false</enabled></diagrams></custom> in site.xml.
+## URLs can be overridden with <mermaidUrl>, <pakoUrl> children of <diagrams>.
+#macro ( diagramScripts )
+#**##set ( $diagramsEnabled = true )
+#**##set ( $diagramsEl = $decoration.custom.getChild( 'diagrams' ) )
+#**##set ( $mermaidUrl = "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js" )
+#**##set ( $pakoUrl = "https://cdn.jsdelivr.net/npm/pako@2.1.0/dist/pako.min.js" )
+#**##if ( $diagramsEl )
+#*  *##set ( $enabledEl = $diagramsEl.getChild( 'enabled' ) )
+#*  *##if ( $enabledEl && $enabledEl.getValue() == "false" )
+#*    *##set ( $diagramsEnabled = false )
+#*  *##end
+#*  *##set ( $mUrl = $diagramsEl.getChild( 'mermaidUrl' ) )
+#*  *##if ( $mUrl ) #set ( $mermaidUrl = $mUrl.getValue() ) #end
+#*  *##set ( $pUrl = $diagramsEl.getChild( 'pakoUrl' ) )
+#*  *##if ( $pUrl ) #set ( $pakoUrl = $pUrl.getValue() ) #end
+#**##end
+#**##if ( $diagramsEnabled )
+    <script defer src="$mermaidUrl"></script>
+    <script defer src="$pakoUrl"></script>
+    <script defer src="$relativePath/js/diagrams.js"></script>
+#**##end
+#end

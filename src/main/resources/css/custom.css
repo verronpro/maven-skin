@@ -1,0 +1,765 @@
+/* maven-skin3 — adapted from the Caring-Coder Jekyll blog */
+:root {
+    /* Brand & theme tokens */
+    --cc-primary: rgba(0, 120, 0); /* CRT green */
+    --cc-accent: rgba(0, 120, 0);
+
+    /* Solarized Light inspired base */
+    --cc-bg: #FDF6E3; /* base3 */
+    --cc-surface: #EEE8D5; /* base2 */
+    --cc-text: #073642; /* base02 */
+    --cc-muted: #657B83; /* base00 */
+    --cc-border: #93A1A1; /* base1 */
+
+    /* Derived tints */
+    --cc-primary-05: rgba(0, 120, 0, .05);
+    --cc-primary-10: rgba(0, 120, 0, .10);
+    --cc-blockquote-bg: var(--cc-primary-05);
+
+    /* Code blocks */
+    --code-bg: var(--cc-surface);
+    --code-fg: #073642;
+    --code-border: var(--cc-border);
+
+    /* Syntax Highlighting (Solarized Light inspired) */
+    --hl-comment: #93A1A1;
+    --hl-keyword: #859900;
+    --hl-name: var(--code-fg);
+    --hl-const: #B58900;
+    --hl-attr: #268BD2;
+    --hl-entity: #CB4B16;
+    --hl-error: #DC322F;
+    --hl-num: #D33682;
+    --hl-str: #2AA198;
+    --hl-op: #6C71C4;
+    --hl-diff-del-bg: rgba(239, 68, 68, .18);
+    --hl-diff-ins-bg: rgba(34, 197, 94, .18);
+    --hl-diff-del-x: rgba(239, 68, 68, .30);
+    --hl-diff-ins-x: rgba(34, 197, 94, .30);
+
+    /* Status colours for Maven reports (surefire, jacoco, …) */
+    --st-success: #2AA198;
+    --st-failure: #DC322F;
+    --st-warning: #B58900;
+    --st-skipped: #93A1A1;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --cc-text: #E6E6E6;
+        --cc-muted: #A3A3A3;
+        --cc-bg: #121212;
+        --cc-surface: #1C1C1C;
+        --cc-border: #2A2A2A;
+        --cc-blockquote-bg: var(--cc-primary-10);
+
+        --code-bg: #141414;
+        --code-fg: #E8E8E8;
+        --code-border: var(--cc-border);
+
+        --hl-keyword: #A3C400;
+        --hl-const: #E0B34B;
+        --hl-attr: #4EA4E0;
+        --hl-entity: #F0792B;
+        --hl-error: #EF4444;
+        --hl-num: #F472B6;
+        --hl-str: #33D1B6;
+        --hl-op: #9F86FF;
+        --hl-diff-del-bg: rgba(239, 68, 68, .25);
+        --hl-diff-ins-bg: rgba(34, 197, 94, .25);
+        --hl-diff-del-x: rgba(239, 68, 68, .45);
+        --hl-diff-ins-x: rgba(34, 197, 94, .45);
+
+        --st-success: #33D1B6;
+        --st-failure: #EF4444;
+        --st-warning: #E0B34B;
+        --st-skipped: #A3A3A3;
+    }
+}
+
+/* 1. BASE STYLES */
+body {
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+    background: var(--cc-bg);
+    color: var(--cc-text);
+    max-width: 100%;
+    margin: 0;
+}
+
+h1, h2, h3, h4 {
+    font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, Helvetica, Arial, sans-serif;
+    margin-top: 0;
+}
+
+code, pre {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+}
+
+a {
+    color: var(--cc-primary);
+    text-underline-offset: .15em;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+a.externalLink::after {
+    content: " ↗";
+    font-size: .85em;
+    opacity: .7;
+}
+
+/* 2. LAYOUT & CONTAINERS */
+.container-wide {
+    max-width: min(1200px, 80vw);
+    margin-inline: auto;
+    padding-inline: 1rem;
+}
+
+.logo {
+    width: 2em;
+    height: 2em;
+    padding: 0.35em;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo img, .logo svg {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.hero-grid, .cards, .home-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    align-items: start;
+}
+
+@media (min-width: 800px) {
+    .hero-grid {
+        grid-template-columns: 1.4fr .6fr;
+    }
+
+    .cards {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+    }
+}
+
+@media (min-width: 900px) {
+    .home-grid {
+        grid-template-columns: minmax(0, 2.5fr) minmax(280px, 1fr);
+    }
+}
+
+.home-sidebar {
+    padding: 0;
+    min-width: 280px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* 3. COMPONENTS */
+.card, .post-card {
+    border: 1px solid var(--cc-border);
+    border-radius: 0;
+    padding: 1rem;
+    background: var(--cc-surface);
+}
+
+.card h3 {
+    margin: 0 0 .5rem;
+    font-size: 1rem;
+}
+
+.post-meta {
+    color: var(--cc-muted);
+    font-size: .9rem;
+}
+
+.btn {
+    display: inline-block;
+    padding: .5rem .9rem;
+    border-radius: 0;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.btn-primary {
+    background: var(--cc-primary);
+    color: #fff;
+}
+
+.btn-ghost {
+    border: 1px solid currentColor;
+    color: var(--cc-primary);
+    background: transparent;
+}
+
+.btn:hover {
+    filter: brightness(0.95);
+}
+
+.tag {
+    display: inline-block;
+    padding: .15rem .5rem;
+    border-radius: 0;
+    margin: 0 .5rem .25rem 0;
+    background: var(--cc-primary-10);
+    color: var(--cc-primary);
+    font-size: .85em;
+}
+
+blockquote {
+    border-left: 4px solid var(--cc-primary);
+    padding: .5rem 1rem;
+    background: var(--cc-blockquote-bg);
+}
+
+/* 4. CONTENT SAFETY & RESPONSIVENESS */
+#main, .post-content, .post-content li, .post-content p {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+
+pre, .highlight, .highlighter-rouge .highlight, .diagram, table, .diagram-render, pre.source, .source pre {
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+img, svg, video, canvas {
+    max-width: 100%;
+    height: auto;
+}
+
+code {
+    overflow-wrap: anywhere;
+    white-space: pre-wrap;
+}
+
+@supports not (overflow-wrap: anywhere) {
+    .post-content a {
+        word-break: break-all;
+    }
+}
+
+/* Tables */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+}
+
+th, td {
+    padding: .5rem .75rem;
+    border: 1px solid var(--cc-border);
+    text-align: left;
+    vertical-align: top;
+}
+
+thead th {
+    background: rgba(17, 24, 39, .04);
+}
+
+tbody tr:nth-child(even) {
+    background: rgba(17, 24, 39, .02);
+}
+
+@media (prefers-color-scheme: dark) {
+    thead th {
+        background: rgba(255, 255, 255, .04);
+    }
+
+    tbody tr:nth-child(even) {
+        background: rgba(255, 255, 255, .02);
+    }
+}
+
+/* 5. SITE HEADER & FOOTER */
+.site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: var(--cc-surface);
+    border-bottom: 1px solid var(--cc-border);
+}
+
+.site-header__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: .75rem;
+    padding-block: .25rem;
+}
+
+.site-header__brand {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    font-weight: 700;
+    color: inherit;
+    text-decoration: none;
+}
+
+.site-header__nav {
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+    flex-wrap: wrap;
+}
+
+.site-header__nav a {
+    color: inherit;
+    text-decoration: none;
+    padding: .25rem .4rem;
+}
+
+.site-header__nav a:hover {
+    text-decoration: underline;
+}
+
+.site-header__nav a.externalLink::after {
+    content: "";
+}
+
+@media (max-width: 800px) {
+    .site-header__nav {
+        gap: .25rem;
+    }
+    .site-header__nav a {
+        font-size: .9rem;
+    }
+}
+
+.site-footer {
+    margin-top: 2rem;
+    border-top: 1px solid var(--cc-border);
+    background: var(--cc-surface);
+}
+
+.site-footer__inner {
+    padding: 2rem 1rem;
+    display: grid;
+    gap: 1.5rem;
+}
+
+@media (min-width: 900px) {
+    .site-footer__inner {
+        grid-template-columns: 2fr 1fr 1fr;
+    }
+}
+
+.site-footer__bottom {
+    border-top: 1px solid var(--cc-border);
+    padding: .75rem 1rem;
+    color: var(--cc-muted);
+    text-align: center;
+}
+
+.site-footer a {
+    color: inherit;
+}
+
+.site-footer .muted {
+    color: var(--cc-muted);
+}
+
+a.poweredBy img {
+    height: 1.5em;
+    vertical-align: middle;
+}
+
+/* 6. BREADCRUMBS */
+.breadcrumbs {
+    color: var(--cc-muted);
+    font-size: .9rem;
+    margin: 0 0 1rem;
+    padding-block: .25rem;
+    border-bottom: 1px dashed var(--cc-border);
+}
+
+.breadcrumbs a {
+    color: inherit;
+}
+
+.breadcrumbs .crumb-current {
+    color: var(--cc-text);
+    font-weight: 600;
+}
+
+/* 7. SIDEBAR MENU (Maven menus rendered as cards) */
+.sidebar-menu h3 {
+    margin: 0 0 .5rem;
+    font-size: 1rem;
+}
+
+.sidebar-nav {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+}
+
+.sidebar-nav ul {
+    list-style: none;
+    padding-left: 1rem;
+    margin: .25rem 0;
+    border-left: 1px solid var(--cc-border);
+}
+
+.sidebar-nav li {
+    margin: .25rem 0;
+}
+
+.sidebar-nav a {
+    color: inherit;
+    text-decoration: none;
+    display: inline-block;
+    padding: .15rem .25rem;
+    border-radius: 2px;
+}
+
+.sidebar-nav a:hover {
+    background: var(--cc-primary-10);
+    color: var(--cc-primary);
+    text-decoration: none;
+}
+
+.sidebar-nav li.active > .active-link {
+    color: var(--cc-primary);
+    font-weight: 700;
+    border-left: 3px solid var(--cc-primary);
+    padding-left: .5rem;
+    margin-left: -.75rem;
+    display: inline-block;
+}
+
+.sidebar-meta .list-compact {
+    list-style: none;
+    padding-left: 0;
+}
+
+.sidebar-meta .list-compact li {
+    margin: .15rem 0;
+    font-size: .9rem;
+}
+
+/* 8. POST-CONTENT ENHANCEMENTS */
+.post-content > h1:first-of-type,
+.post-content > .section > h1:first-of-type {
+    margin-top: 0;
+}
+
+.post-edit {
+    margin-bottom: 1rem;
+    text-align: right;
+}
+
+.post-edit .btn {
+    font-size: .85rem;
+    padding: .25rem .6rem;
+}
+
+/* Doxia sections — collapsed visual, but keep semantics */
+.section, .subsection {
+    margin-block: 1rem;
+}
+
+/* 9. SYNTAX HIGHLIGHTING (Rouge / AsciiDoctor / generic .highlight) */
+.highlighter-rouge .highlight, .diagram, pre.source, .source pre {
+    color: var(--code-fg);
+    background: var(--code-bg);
+    border: 1px solid var(--code-border);
+    border-radius: 0;
+}
+
+.highlight {
+    line-height: 1.45;
+}
+
+.highlight pre {
+    padding: .5rem .75rem;
+    margin: 0;
+    background: var(--code-bg);
+}
+
+pre.source {
+    padding: .5rem .75rem;
+}
+
+.highlight .c, .highlight .cm, .highlight .c1 {
+    color: var(--hl-comment);
+    font-style: italic;
+}
+
+.highlight .cp { color: var(--hl-const); }
+
+.highlight .k, .highlight .kd, .highlight .kn, .highlight .kp, .highlight .kr, .highlight .kt {
+    color: var(--hl-keyword);
+}
+
+.highlight .n, .highlight .nx { color: var(--hl-name); }
+.highlight .nc, .highlight .no { color: var(--hl-const); }
+.highlight .na, .highlight .nf, .highlight .nn, .highlight .nt { color: var(--hl-attr); }
+.highlight .ni { color: var(--hl-entity); }
+.highlight .ne { color: var(--hl-error); }
+.highlight .l, .highlight .m, .highlight .mb, .highlight .mf, .highlight .mh, .highlight .mi, .highlight .il, .highlight .mo {
+    color: var(--hl-num);
+}
+.highlight .s, .highlight .sa, .highlight .sb, .highlight .sc, .highlight .sd, .highlight .s1, .highlight .s2, .highlight .se, .highlight .sh, .highlight .si, .highlight .sr, .highlight .ss, .highlight .sx {
+    color: var(--hl-str);
+}
+.highlight .o, .highlight .ow { color: var(--hl-op); }
+.highlight .p { color: var(--hl-name); }
+
+.highlight .gd {
+    color: var(--code-fg);
+    background: var(--hl-diff-del-bg);
+    box-shadow: inset 4px 0 0 #EF4444;
+}
+
+.highlight .gi {
+    color: var(--code-fg);
+    background: var(--hl-diff-ins-bg);
+    box-shadow: inset 4px 0 0 #22C55E;
+}
+
+.highlight .gd .x { background: var(--hl-diff-del-x); }
+.highlight .gi .x { background: var(--hl-diff-ins-x); }
+.highlight .gr { color: #F87171; }
+.highlight .gh { color: #93C5FD; font-weight: 600; }
+.highlight .gs { font-weight: 600; }
+.highlight .ge { font-style: italic; }
+
+/* JXR (cross-referenced source) — colour matches our token set */
+.jxr_comment    { color: var(--hl-comment); font-style: italic; }
+.jxr_javadoccomment { color: var(--hl-comment); font-style: italic; }
+.jxr_keyword    { color: var(--hl-keyword); }
+.jxr_string     { color: var(--hl-str); }
+.jxr_classname  { color: var(--hl-const); }
+
+/* 10. DIAGRAMS */
+.diagram-title {
+    font-weight: 600;
+    margin: .25rem 0 .5rem;
+    color: var(--cc-muted);
+}
+
+.diagram-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 1rem;
+    align-items: start;
+}
+
+@media (min-width: 900px) {
+    .diagram-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.diagram-source pre {
+    max-height: 28rem;
+    margin: 0;
+}
+
+.diagram-source, .diagram-render {
+    min-width: 0;
+    background: var(--cc-surface);
+}
+
+.diagram-render {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    min-height: 6rem;
+}
+
+.diagram-render img, .diagram-render svg {
+    cursor: zoom-in;
+}
+
+.diagram-zoom-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, .75);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 2rem;
+    cursor: zoom-out;
+}
+
+.diagram-zoom-overlay__inner {
+    max-width: 95vw;
+    max-height: 95vh;
+    overflow: auto;
+    background: transparent;
+}
+
+.diagram-zoom-overlay__inner img, .diagram-zoom-overlay__inner svg {
+    display: block;
+    max-width: 95vw;
+    max-height: 95vh;
+    height: auto;
+}
+
+/* 11. MAVEN REPORT STYLING (project-info, surefire, jacoco, jxr) */
+
+/* Doxia generic body table — used by most project-info-reports */
+table.bodyTable {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 1rem 0;
+}
+
+table.bodyTable th,
+table.bodyTable td {
+    border: 1px solid var(--cc-border);
+    padding: .4rem .6rem;
+}
+
+table.bodyTable th {
+    background: var(--cc-surface);
+    text-align: left;
+}
+
+table.bodyTable tr.a { background: rgba(17, 24, 39, .02); }
+table.bodyTable tr.b { background: transparent; }
+
+@media (prefers-color-scheme: dark) {
+    table.bodyTable tr.a { background: rgba(255, 255, 255, .03); }
+}
+
+/* Surefire test report rows */
+table.bodyTable tr.testsuite,
+.testsuite, .successful, .failed, .skipped, .error, .flake {
+    /* baseline neutral; coloured below */
+}
+
+td.successful, .successful > td, tr.successful td {
+    color: var(--st-success);
+}
+
+td.failed, td.error, .failed > td, .error > td, tr.failed td, tr.error td {
+    color: var(--st-failure);
+    font-weight: 600;
+}
+
+td.skipped, .skipped > td, tr.skipped td {
+    color: var(--st-skipped);
+    font-style: italic;
+}
+
+td.flake, .flake > td, tr.flake td {
+    color: var(--st-warning);
+}
+
+/* JaCoCo coverage bars */
+.bar img {
+    image-rendering: pixelated;
+}
+
+/* Doxia notice icons rendered with .ico_ classes — we just colour them */
+.ico_info, .ico_warning, .ico_error, .ico_success {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    vertical-align: middle;
+    margin-right: .25em;
+}
+
+/* "Powered by" banner area in old reports */
+img.imageLink {
+    border: 0;
+    vertical-align: middle;
+}
+
+/* 12. MISC COMPONENTS */
+.list-compact {
+    margin: .25rem 0;
+    padding-left: 1.1rem;
+}
+
+.list-compact li {
+    margin: .15rem 0;
+}
+
+.toc-list {
+    list-style: none;
+    padding-left: 0;
+    margin: .5rem 0;
+}
+
+.toc-list li {
+    margin: .25rem 0;
+}
+
+.toc-list .toc-level-3 {
+    margin-left: 1rem;
+    opacity: .9;
+}
+
+.skip-link {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+
+.skip-link:focus {
+    position: static;
+    width: auto;
+    height: auto;
+    padding: .5rem;
+    background: var(--cc-bg);
+    border: 2px solid var(--cc-primary);
+}
+
+.muted {
+    color: var(--cc-muted);
+}
+
+/* 13. PRINT STYLES */
+@media print {
+    body {
+        font-family: Georgia, "Times New Roman", serif;
+        color: #000;
+        background: #fff;
+    }
+
+    .btn, nav, header, footer, .site-header, .site-footer, .home-sidebar, .breadcrumbs, .post-edit {
+        display: none !important;
+    }
+
+    .home-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    .card, .post-card, pre, .diagram-source, .diagram-render {
+        border: none;
+        background: #fff;
+    }
+
+    a[href^="http"]::after {
+        content: " (" attr(href) ")";
+    }
+
+    .diagram-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .diagram-source pre {
+        max-height: none;
+    }
+}
