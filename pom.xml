@@ -9,12 +9,18 @@
     <artifactId>maven-skin</artifactId>
     <version>1.0</version>
 
-  <name>maven-skin3</name>
     <name>maven-skin</name>
 
     <description>Maven site blog-like skin for verron.pro domain</description>
     <url>https://maven-skin.verron.pro</url>
+    <licenses>
+        <license>
+            <name>MIT</name>
+            <url>LICENSE</url>
+        </license>
+    </licenses>
     <developers>
+        <developer>
             <name>Joseph Verron</name>
         </developer>
     </developers>
