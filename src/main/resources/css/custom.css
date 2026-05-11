@@ -1,19 +1,16 @@
-/* maven-skin — adapted from the Caring-Coder Jekyll blog */
 :root {
-    /* Brand & theme tokens */
-    --cc-primary: rgba(0, 120, 0); /* CRT green */
-    --cc-accent: rgba(0, 120, 0);
-
-    /* Solarized Light inspired base */
-    --cc-bg: #FDF6E3; /* base3 */
-    --cc-surface: #EEE8D5; /* base2 */
-    --cc-text: #073642; /* base02 */
-    --cc-muted: #657B83; /* base00 */
-    --cc-border: #93A1A1; /* base1 */
-
-    /* Derived tints */
+    /* CRT green brand & theme tokens */
+    --cc-primary:    rgba(0, 120, 0);
+    --cc-accent:     rgba(0, 120, 0);
     --cc-primary-05: rgba(0, 120, 0, .05);
     --cc-primary-10: rgba(0, 120, 0, .10);
+    
+    /* Solarized Light inspired base */
+    --cc-bg:      #FDF6E3; /* base3 */
+    --cc-surface: #EEE8D5; /* base2 */
+    --cc-text:    #073642; /* base02 */
+    --cc-muted:   #657B83; /* base00 */
+    --cc-border:  #93A1A1; /* base1 */
     --cc-blockquote-bg: var(--cc-primary-05);
 
     /* Code blocks */
@@ -22,20 +19,20 @@
     --code-border: var(--cc-border);
 
     /* Syntax Highlighting (Solarized Light inspired) */
-    --hl-comment: #93A1A1;
-    --hl-keyword: #859900;
-    --hl-name: var(--code-fg);
-    --hl-const: #B58900;
-    --hl-attr: #268BD2;
-    --hl-entity: #CB4B16;
-    --hl-error: #DC322F;
-    --hl-num: #D33682;
-    --hl-str: #2AA198;
-    --hl-op: #6C71C4;
+    --hl-comment:     #93A1A1;
+    --hl-keyword:     #859900;
+    --hl-name:        var(--code-fg);
+    --hl-const:       #B58900;
+    --hl-attr:        #268BD2;
+    --hl-entity:      #CB4B16;
+    --hl-error:       #DC322F;
+    --hl-num:         #D33682;
+    --hl-str:         #2AA198;
+    --hl-op:          #6C71C4;
     --hl-diff-del-bg: rgba(239, 68, 68, .18);
     --hl-diff-ins-bg: rgba(34, 197, 94, .18);
-    --hl-diff-del-x: rgba(239, 68, 68, .30);
-    --hl-diff-ins-x: rgba(34, 197, 94, .30);
+    --hl-diff-del-x:  rgba(239, 68, 68, .30);
+    --hl-diff-ins-x:  rgba(34, 197, 94, .30);
 
     /* Status colours for Maven reports (surefire, jacoco, …) */
     --st-success: #2AA198;
@@ -46,29 +43,35 @@
 
 @media (prefers-color-scheme: dark) {
     :root {
-        --cc-text: #E6E6E6;
-        --cc-muted: #A3A3A3;
-        --cc-bg: #121212;
-        --cc-surface: #1C1C1C;
-        --cc-border: #2A2A2A;
+        /* Lighter CRT green brand & theme tokens */
+        --cc-primary:    rgba(0, 209, 0);
+        --cc-accent:     rgba(0, 209, 0);
+        --cc-primary-05: rgba(0, 209, 0, .05);
+        --cc-primary-10: rgba(0, 209, 0, .10);
+        
+        --cc-text:          #E6E6E6;
+        --cc-muted:         #A3A3A3;
+        --cc-bg:            #121212;
+        --cc-surface:       #1C1C1C;
+        --cc-border:        #2A2A2A;
         --cc-blockquote-bg: var(--cc-primary-10);
 
-        --code-bg: #141414;
-        --code-fg: #E8E8E8;
+        --code-bg:     #141414;
+        --code-fg:     #E8E8E8;
         --code-border: var(--cc-border);
 
-        --hl-keyword: #A3C400;
-        --hl-const: #E0B34B;
-        --hl-attr: #4EA4E0;
-        --hl-entity: #F0792B;
-        --hl-error: #EF4444;
-        --hl-num: #F472B6;
-        --hl-str: #33D1B6;
-        --hl-op: #9F86FF;
+        --hl-keyword:     #A3C400;
+        --hl-const:       #E0B34B;
+        --hl-attr:        #4EA4E0;
+        --hl-entity:      #F0792B;
+        --hl-error:       #EF4444;
+        --hl-num:         #F472B6;
+        --hl-str:         #33D1B6;
+        --hl-op:          #9F86FF;
         --hl-diff-del-bg: rgba(239, 68, 68, .25);
         --hl-diff-ins-bg: rgba(34, 197, 94, .25);
-        --hl-diff-del-x: rgba(239, 68, 68, .45);
-        --hl-diff-ins-x: rgba(34, 197, 94, .45);
+        --hl-diff-del-x:  rgba(239, 68, 68, .45);
+        --hl-diff-ins-x:  rgba(34, 197, 94, .45);
 
         --st-success: #33D1B6;
         --st-failure: #EF4444;
