@@ -254,11 +254,13 @@ code {
     }
 }
 
-/* Tables */
+/* Tables — explicit tokens so browser UA white-background never bleeds through */
 table {
     width: 100%;
     border-collapse: collapse;
     margin: 1rem 0;
+    background: var(--cc-bg);
+    color: var(--cc-text);
 }
 
 th, td {
@@ -266,23 +268,25 @@ th, td {
     border: 1px solid var(--cc-border);
     text-align: left;
     vertical-align: top;
+    background: transparent;
+    color: inherit;
 }
 
 thead th {
-    background: rgba(17, 24, 39, .04);
+    background: rgba(17, 24, 39, .06);
 }
 
 tbody tr:nth-child(even) {
-    background: rgba(17, 24, 39, .02);
+    background: rgba(17, 24, 39, .03);
 }
 
 @media (prefers-color-scheme: dark) {
     thead th {
-        background: rgba(255, 255, 255, .04);
+        background: rgba(255, 255, 255, .08);
     }
 
     tbody tr:nth-child(even) {
-        background: rgba(255, 255, 255, .02);
+        background: rgba(255, 255, 255, .04);
     }
 }
 
@@ -537,6 +541,28 @@ pre.source {
 .highlight .gs { font-weight: 600; }
 .highlight .ge { font-style: italic; }
 
+/* CodeRay syntax highlighting (coderay-css=style emits inline styles;
+   coderay-css=class emits these span classes inside .source pre) */
+.source pre .co, .source pre .c  { color: var(--hl-comment); font-style: italic; } /* comment */
+.source pre .kw, .source pre .r  { color: var(--hl-keyword); }                    /* keyword / reserved */
+.source pre .co.doc              { color: var(--hl-comment); font-style: italic; } /* doc comment */
+.source pre .s, .source pre .s1, .source pre .s2 { color: var(--hl-str); }        /* string */
+.source pre .sy                  { color: var(--hl-str); }                         /* symbol */
+.source pre .i, .source pre .il  { color: var(--hl-num); }                         /* integer / float */
+.source pre .fl                  { color: var(--hl-num); }                         /* float */
+.source pre .cl, .source pre .nc { color: var(--hl-const); }                       /* class name */
+.source pre .fu, .source pre .nf { color: var(--hl-attr); }                        /* function / method */
+.source pre .an                  { color: var(--hl-attr); }                         /* annotation */
+.source pre .er                  { color: var(--hl-error); }                        /* error */
+.source pre .op                  { color: var(--hl-op); }                           /* operator */
+.source pre .pc                  { color: var(--hl-entity); }                       /* predefined constant */
+.source pre .pp                  { color: var(--hl-const); }                        /* preprocessor */
+.source pre .dl                  { color: var(--hl-str); }                          /* string delimiter */
+.source pre .sh                  { color: var(--hl-str); }                          /* shell */
+.source pre .iv                  { color: var(--hl-num); }                          /* instance variable */
+.source pre .cv                  { color: var(--hl-num); }                          /* class variable */
+.source pre .gv                  { color: var(--hl-num); }                          /* global variable */
+
 /* JXR (cross-referenced source) — colour matches our token set */
 .jxr_comment    { color: var(--hl-comment); font-style: italic; }
 .jxr_javadoccomment { color: var(--hl-comment); font-style: italic; }
@@ -614,11 +640,13 @@ pre.source {
 
 /* 11. MAVEN REPORT STYLING (project-info, surefire, jacoco, jxr) */
 
-/* Doxia generic body table — used by most project-info-reports */
+/* Doxia generic body table — used by most project-info-reports and AsciiDoc pages */
 table.bodyTable {
     width: 100%;
     border-collapse: collapse;
     margin: 1rem 0;
+    background: var(--cc-bg);
+    color: var(--cc-text);
 }
 
 table.bodyTable th,
@@ -627,20 +655,22 @@ table.bodyTable td {
     border: 1px solid var(--cc-border);
     text-align: left;
     vertical-align: top;
+    background: transparent;
+    color: inherit;
 }
 
 table.bodyTable th {
-    background: rgba(17, 24, 39, .04);
+    background: rgba(17, 24, 39, .06);
 }
 
-table.bodyTable tr.a { background: rgba(17, 24, 39, .02); }
+table.bodyTable tr.a { background: rgba(17, 24, 39, .03); }
 table.bodyTable tr.b { background: transparent; }
 
 @media (prefers-color-scheme: dark) {
     table.bodyTable th {
-        background: rgba(255, 255, 255, .04);
+        background: rgba(255, 255, 255, .08);
     }
-    table.bodyTable tr.a { background: rgba(255, 255, 255, .02); }
+    table.bodyTable tr.a { background: rgba(255, 255, 255, .04); }
 }
 
 /* Surefire test report rows */
