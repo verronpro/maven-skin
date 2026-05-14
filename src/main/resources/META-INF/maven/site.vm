@@ -113,5 +113,9 @@
         </div>
       </div>
     </footer>
+  <script>
+    /* Remove hardcoded inline style="background: #FFFFFF" emitted by Doxia on bodyTable elements */
+    document.querySelectorAll('table.bodyTable[style]').forEach(function(t){t.removeAttribute('style');});
+  </script>
   </body>
 </html>
