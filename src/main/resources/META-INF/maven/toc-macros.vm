@@ -1,0 +1,128 @@
+##
+## Velocity macros for Table of Contents generation in Maven Skin
+## Provides ready-to-use macros for rendering and initializing TOC
+##
+
+#*
+ * Renders the main table of contents container
+ * This macro outputs the outer div that will contain the TOC
+ * 
+ * Usage: #renderTableOfContents()
+ *#
+#macro( renderTableOfContents )
+<div class="toc-container" id="toc">
+  <h3 class="toc-title">Table of Contents</h3>
+  <!-- TOC will be generated here by JavaScript -->
+</div>
+#end
+
+#*
+ * Initializes the table of contents generator with custom options
+ * Accepts a map of configuration options
+ *
+ * Parameters:
+ *   - headingSelector: CSS selector for headings (default: 'h2, h3, h4, h5, h6')
+ *   - containerSelector: CSS selector for TOC container (default: '.toc-container')
+ *   - minHeadings: Minimum number of headings to show TOC (default: 3)
+ *   - smoothScroll: Enable smooth scrolling (default: true)
+ *   - highlightActiveSection: Highlight current section (default: true)
+ *
+ * Usage: #initializeTableOfContents({
+ *   'headingSelector': 'h2, h3',
+ *   'minHeadings': 2
+ * })
+ *#
+#macro( initializeTableOfContents $options )
+<script type="application/javascript">
+(function() {
+  // Configuration from template
+  var config = {
+    #if( $options && $options.headingSelector )
+    headingSelector: '$options.headingSelector',
+    #end
+    #if( $options && $options.containerSelector )
+    containerSelector: '$options.containerSelector',
+    #end
+    #if( $options && $options.minHeadings )
+    minHeadings: $options.minHeadings,
+    #end
+    #if( $options && $options.smoothScroll != false )
+    smoothScroll: #if( $options.smoothScroll == false )false#else true#end,
+    #end
+    #if( $options && $options.highlightActiveSection != false )
+    highlightActiveSection: #if( $options.highlightActiveSection == false )false#else true#end
+    #end
+  };
+
+  // Initialize TOC Generator when available
+  if (typeof TOCGenerator !== 'undefined') {
+    TOCGenerator.init(config);
+  } else {
+    // Wait for script to load if not immediately available
+    document.addEventListener('DOMContentLoaded', function() {
+      if (typeof TOCGenerator !== 'undefined') {
+        TOCGenerator.init(config);
+      }
+    });
+  }
+})();
+</script>
+#end
+
+#*
+ * Complete setup macro - renders TOC container and initializes generator
+ * This is the simplest way to add TOC to a page
+ *
+ * Parameters (optional):
+ *   - config: Map of configuration options (see initializeTableOfContents)
+ *
+ * Usage: #setupTableOfContents()
+ * Or:    #setupTableOfContents({'minHeadings': 2})
+ *#
+#macro( setupTableOfContents $config )
+#renderTableOfContents()
+#initializeTableOfContents( $config )
+#end
+
+#*
+ * Conditional TOC wrapper - only renders TOC if minimum heading count is met
+ * Useful for pages that may or may not have enough headings
+ *
+ * Parameters:
+ *   - minCount: Minimum number of headings required (default: 3)
+ *   - config: Configuration options map (optional)
+ *
+ * Usage: #conditionalTableOfContents(2)
+ *#
+#macro( conditionalTableOfContents $minCount $config )
+<script type="application/javascript">
+(function() {
+  // Count headings
+  var headings = document.querySelectorAll('h2, h3, h4, h5, h6');
+  var minRequired = $minCount || 3;
+  
+  if (headings.length >= minRequired) {
+    #setupTableOfContents( $config )
+  }
+})();
+</script>
+#end
+
+#*
+ * Inline TOC list builder - creates a simple TOC list structure
+ * Useful for custom TOC placement
+ *
+ * Parameters:
+ *   - headings: Collection of heading objects
+ *
+ * Usage (in custom template):
+ * #set( $headings = [...] )
+ * #renderTOCList( $headings )
+ *#
+#macro( renderTOCList $headings )
+<ul class="toc-list">
+#foreach( $heading in $headings )
+  <li><a href="#$heading.id" class="toc-link">$heading.text</a></li>
+#end
+</ul>
+#end
