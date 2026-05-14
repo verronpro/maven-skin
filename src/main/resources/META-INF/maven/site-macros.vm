@@ -151,11 +151,6 @@
 #**##set ( $hasPublish = ( $decoration.publishDate && $decoration.publishDate.position && !$decoration.publishDate.position.equalsIgnoreCase( "none" ) ) )
 #**##set ( $hasVersion = ( $decoration.version && $decoration.version.position && !$decoration.version.position.equalsIgnoreCase( "none" ) ) )
 #**##if ( $hasPublish || $hasVersion )
-#*  *##if ( $publishDate )
-#*    *##set ( $dateValue = $dateFormat.format( $publishDate ) )
-#*  *##else
-#*    *##set ( $dateValue = $dateFormat.format( $currentDate ) )
-#*  *##end
         <div class="card sidebar-meta">
           <h3>Project</h3>
           <ul class="list-compact">
@@ -163,7 +158,7 @@
             <li><span class="muted">Version:</span> <span id="projectVersion">${project.version}</span></li>
 #*  *##end
 #*  *##if ( $hasPublish )
-            <li><span class="muted">Last published:</span> <span id="publishDate">$dateValue</span></li>
+            <li><span class="muted">Last published:</span> <span id="publishDate">#if( $publishDate )$dateFormat.format( $publishDate )#else$dateFormat.format( $currentDate )#end</span></li>
 #*  *##end
           </ul>
         </div>
