@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Table of Contents Example - Maven Skin</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background-color: #fff;
+    }
+
+    .page-wrapper {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    header {
+      border-bottom: 2px solid #007bff;
+      padding-bottom: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+      color: #212529;
+    }
+
+    .subtitle {
+      font-size: 1.1rem;
+      color: #666;
+    }
+
+    main {
+      background-color: #f8f9fa;
+      padding: 2rem;
+      border-radius: 0.5rem;
+    }
+
+    h2 {
+      font-size: 2rem;
+      margin-top: 2.5rem;
+      margin-bottom: 1rem;
+      color: #212529;
+      border-bottom: 1px solid #dee2e6;
+      padding-bottom: 0.5rem;
+    }
+
+    h2:first-child {
+      margin-top: 0;
+    }
+
+    h3 {
+      font-size: 1.5rem;
+      margin-top: 1.5rem;
+      margin-bottom: 0.75rem;
+      color: #495057;
+    }
+
+    h4 {
+      font-size: 1.25rem;
+      margin-top: 1rem;
+      margin-bottom: 0.5rem;
+      color: #6c757d;
+    }
+
+    p {
+      margin-bottom: 1rem;
+      text-align: justify;
+    }
+
+    code {
+      background-color: #e9ecef;
+      padding: 0.2rem 0.4rem;
+      border-radius: 0.25rem;
+      font-family: 'Courier New', monospace;
+      font-size: 0.9em;
+    }
+
+    pre {
+      background-color: #2d2d2d;
+      color: #f8f8f2;
+      padding: 1rem;
+      border-radius: 0.5rem;
+      overflow-x: auto;
+      margin: 1rem 0;
+      font-family: 'Courier New', monospace;
+    }
+
+    pre code {
+      background-color: transparent;
+      padding: 0;
+      color: inherit;
+    }
+
+    .highlight-box {
+      background-color: #d1ecf1;
+      border-left: 4px solid #0c5460;
+      padding: 1rem;
+      margin: 1rem 0;
+      border-radius: 0.25rem;
+    }
+
+    .highlight-box p {
+      margin: 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+    }
+
+    th, td {
+      padding: 0.75rem;
+      text-align: left;
+      border-bottom: 1px solid #dee2e6;
+    }
+
+    th {
+      background-color: #e9ecef;
+      font-weight: 600;
+    }
+
+    tr:hover {
+      background-color: #f8f9fa;
+    }
+
+    ul, ol {
+      margin-left: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    li {
+      margin-bottom: 0.5rem;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+
+    .feature-card {
+      background-color: #fff;
+      border: 1px solid #dee2e6;
+      padding: 1.5rem;
+      border-radius: 0.5rem;
+      transition: box-shadow 0.3s ease;
+    }
+
+    .feature-card:hover {
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .feature-card h4 {
+      margin-top: 0;
+      color: #007bff;
+    }
+
+    .toc-container {
+      background-color: #f8f9fa;
+      border-left: 4px solid #007bff;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+      border-radius: 0.25rem;
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    .toc-container .toc-title {
+      margin-top: 0;
+      margin-bottom: 1rem;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #212529;
+    }
+
+    .toc-list {
+      list-style: none;
+      padding-left: 0;
+      margin: 0;
+    }
+
+    .toc-list ul {
+      list-style: none;
+      padding-left: 1.5rem;
+      margin: 0.25rem 0;
+    }
+
+    .toc-list li {
+      margin: 0.5rem 0;
+    }
+
+    .toc-link {
+      color: #007bff;
+      text-decoration: none;
+      display: inline-block;
+      padding: 0.25rem 0;
+      border-bottom: 1px solid transparent;
+      transition: all 0.2s ease-in-out;
+      position: relative;
+    }
+
+    .toc-link:hover {
+      color: #0056b3;
+      border-bottom-color: #0056b3;
+      padding-left: 0.25rem;
+    }
+
+    .toc-link.active {
+      color: #0056b3;
+      font-weight: 600;
+      border-left: 3px solid #007bff;
+      padding-left: 0.5rem;
+      margin-left: -0.5rem;
+    }
+
+    .toc-link:focus-visible {
+      outline: 2px solid #007bff;
+      outline-offset: 2px;
+      border-radius: 0.25rem;
+    }
+
+    footer {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid #dee2e6;
+      text-align: center;
+      color: #666;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 768px) {
+      .page-wrapper {
+        padding: 1rem;
+      }
+
+      h1 {
+        font-size: 1.75rem;
+      }
+
+      h2 {
+        font-size: 1.5rem;
+      }
+
+      main {
+        padding: 1rem;
+      }
+
+      .feature-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .toc-container {
+        margin: 1rem 0;
+        padding: 1rem;
+        font-size: 0.9rem;
+      }
+
+      .toc-list ul {
+        padding-left: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-wrapper">
+    <header>
+      <h1>Table of Contents Feature</h1>
+      <p class="subtitle">Interactive documentation navigation for Maven Skin</p>
+    </header>
+
+    <main>
+      <div class="toc-container" id="toc">
+        <h3 class="toc-title">Table of Contents</h3>
+        <!-- TOC will be generated here -->
+      </div>
+
+      <h2 id="introduction">Introduction</h2>
+      <p>
+        The Table of Contents (TOC) feature for Maven Skin provides automatic generation of an interactive navigation
+        structure for your documentation pages. It scans the page for headings and creates a hierarchical list that
+        helps readers quickly navigate to sections of interest.
+      </p>
+      <p>
+        This feature is particularly useful for long-form documentation, API references, and blog posts where readers
+        need to understand the page structure at a glance.
+      </p>
+
+      <h2 id="key-features">Key Features</h2>
+
+      <div class="feature-grid">
+        <div class="feature-card">
+          <h4>🔍 Automatic Detection</h4>
+          <p>Scans your content for headings and builds structure automatically</p>
+        </div>
+        <div class="feature-card">
+          <h4>⚡ Smooth Scrolling</h4>
+          <p>Click links for smooth animated navigation to sections</p>
+        </div>
+        <div class="feature-card">
+          <h4>🎯 Active Highlighting</h4>
+          <p>Current section automatically highlighted as you scroll</p>
+        </div>
+        <div class="feature-card">
+          <h4>📱 Responsive</h4>
+          <p>Works perfectly on desktop, tablet, and mobile devices</p>
+        </div>
+        <div class="feature-card">
+          <h4>♿ Accessible</h4>
+          <p>WCAG AA compliant with full keyboard navigation support</p>
+        </div>
+        <div class="feature-card">
+          <h4>🎨 Customizable</h4>
+          <p>Easy to style and configure for your specific needs</p>
+        </div>
+      </div>
+
+      <h2 id="getting-started">Getting Started</h2>
+
+      <h3>Basic Setup</h3>
+      <p>To add a table of contents to your page, include three things:</p>
+
+      <ol>
+        <li>The TOC container div</li>
+        <li>The JavaScript file</li>
+        <li>The CSS stylesheet</li>
+      </ol>
+
+      <h4>HTML Structure</h4>
+      <pre><code>&lt;div class="toc-container"&gt;&lt;/div&gt;
+
+&lt;main&gt;
+  &lt;h2&gt;Section One&lt;/h2&gt;
+  &lt;p&gt;Content here...&lt;/p&gt;
+  
+  &lt;h2&gt;Section Two&lt;/h2&gt;
+  &lt;p&gt;More content...&lt;/p&gt;
+&lt;/main&gt;</code></pre>
+
+      <h4>Script Integration</h4>
+      <pre><code>&lt;link rel="stylesheet" href="css/toc-styles.css"&gt;
+&lt;script src="js/toc-generator.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+  TOCGenerator.init();
+&lt;/script&gt;</code></pre>
+
+      <h3>Maven Velocity Template</h3>
+      <p>For Maven Site integration, use the provided Velocity macros:</p>
+
+      <pre><code>#parse('toc-macros.vm')
+
+#setupTableOfContents()
+
+$content</code></pre>
+
+      <h2 id="configuration">Configuration Options</h2>
+
+      <p>The TOC generator accepts several configuration options:</p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Option</th>
+            <th>Type</th>
+            <th>Default</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>headingSelector</code></td>
+            <td>string</td>
+            <td>'h2, h3, h4, h5, h6'</td>
+            <td>CSS selector for heading elements</td>
+          </tr>
+          <tr>
+            <td><code>containerSelector</code></td>
+            <td>string</td>
+            <td>'.toc-container'</td>
+            <td>CSS selector for TOC container</td>
+          </tr>
+          <tr>
+            <td><code>minHeadings</code></td>
+            <td>number</td>
+            <td>3</td>
+            <td>Minimum headings needed to display TOC</td>
+          </tr>
+          <tr>
+            <td><code>smoothScroll</code></td>
+            <td>boolean</td>
+            <td>true</td>
+            <td>Enable smooth scrolling on link click</td>
+          </tr>
+          <tr>
+            <td><code>highlightActiveSection</code></td>
+            <td>boolean</td>
+            <td>true</td>
+            <td>Highlight current section on scroll</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Example Configuration</h3>
+      <pre><code>TOCGenerator.init({
+  headingSelector: 'h2, h3',
+  minHeadings: 2,
+  smoothScroll: true,
+  highlightActiveSection: true
+});</code></pre>
+
+      <h2 id="customization">Customization</h2>
+
+      <h3>Styling</h3>
+      <p>Customize the appearance by overriding CSS classes:</p>
+
+      <pre><code>.toc-container {
+  background-color: #fff;
+  border-left-color: #28a745;
+}
+
+.toc-link {
+  color: #28a745;
+}
+
+.toc-link:hover {
+  color: #20c997;
+}
+
+.toc-link.active {
+  border-left-color: #28a745;
+}</code></pre>
+
+      <h3>Dark Mode</h3>
+      <p>The TOC automatically adapts to dark mode. Customize it with:</p>
+
+      <pre><code>@media (prefers-color-scheme: dark) {
+  .toc-container {
+    background-color: #2d2d2d;
+    border-left-color: #66b3ff;
+  }
+
+  .toc-link {
+    color: #66b3ff;
+  }
+}</code></pre>
+
+      <h2 id="accessibility">Accessibility</h2>
+
+      <h3>Features</h3>
+      <ul>
+        <li><strong>Keyboard Navigation:</strong> Full support with Tab, Enter, and Space keys</li>
+        <li><strong>Screen Readers:</strong> Semantic HTML with proper heading hierarchy</li>
+        <li><strong>Focus Indicators:</strong> Clear focus rings for keyboard users</li>
+        <li><strong>High Contrast:</strong> Special styling for high contrast mode</li>
+        <li><strong>Reduced Motion:</strong> Respects user motion preferences</li>
+      </ul>
+
+      <div class="highlight-box">
+        <p>
+          ✓ <strong>WCAG AA Compliant:</strong> The TOC feature meets Web Content Accessibility Guidelines Level AA standards.
+        </p>
+      </div>
+
+      <h2 id="browser-support">Browser Support</h2>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Browser</th>
+            <th>Version</th>
+            <th>Support</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Chrome</td>
+            <td>60+</td>
+            <td>✅ Full</td>
+          </tr>
+          <tr>
+            <td>Firefox</td>
+            <td>55+</td>
+            <td>✅ Full</td>
+          </tr>
+          <tr>
+            <td>Safari</td>
+            <td>12+</td>
+            <td>✅ Full</td>
+          </tr>
+          <tr>
+            <td>Edge</td>
+            <td>15+</td>
+            <td>✅ Full</td>
+          </tr>
+          <tr>
+            <td>IE</td>
+            <td>11</td>
+            <td>⚠️ Basic</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2 id="advanced-usage">Advanced Usage</h2>
+
+      <h3>Multiple TOCs</h3>
+      <p>Generate separate TOCs for different sections:</p>
+
+      <pre><code>&lt;section id="part1"&gt;
+  &lt;div class="toc-container"&gt;&lt;/div&gt;
+  &lt;script&gt;
+    TOCGenerator.init({
+      containerSelector: '#part1 .toc-container',
+      headingSelector: '#part1 h2'
+    });
+  &lt;/script&gt;
+&lt;/section&gt;
+
+&lt;section id="part2"&gt;
+  &lt;div class="toc-container"&gt;&lt;/div&gt;
+  &lt;script&gt;
+    TOCGenerator.init({
+      containerSelector: '#part2 .toc-container',
+      headingSelector: '#part2 h2'
+    });
+  &lt;/script&gt;
+&lt;/section&gt;</code></pre>
+
+      <h3>Conditional Display</h3>
+      <p>Only show TOC if there are enough headings:</p>
+
+      <pre><code>#parse('toc-macros.vm')
+#conditionalTableOfContents(2)</code></pre>
+
+      <h2 id="troubleshooting">Troubleshooting</h2>
+
+      <h3>TOC Not Appearing</h3>
+      <ul>
+        <li>Check that the page has at least 3 headings (or your configured minimum)</li>
+        <li>Verify the container element exists with class <code>toc-container</code></li>
+        <li>Check browser console for JavaScript errors</li>
+        <li>Ensure the script file is loaded correctly</li>
+      </ul>
+
+      <h3>Styling Not Applied</h3>
+      <ul>
+        <li>Verify the CSS file is loaded in the Network tab</li>
+        <li>Check for CSS specificity conflicts with other stylesheets</li>
+        <li>Clear browser cache and rebuild</li>
+        <li>Inspect element with DevTools to see actual styles</li>
+      </ul>
+
+      <h3>Smooth Scrolling Not Working</h3>
+      <ul>
+        <li>Check browser support for smooth scrolling</li>
+        <li>Verify <code>smoothScroll: true</code> in configuration</li>
+        <li>Check for CSS <code>scroll-behavior: auto</code> overrides</li>
+        <li>Test in different browsers to isolate the issue</li>
+      </ul>
+
+      <h2 id="faq">Frequently Asked Questions</h2>
+
+      <h3>Q: Can I customize the colors?</h3>
+      <p>
+        A: Yes! The TOC uses standard CSS classes that you can override. See the Customization section for details.
+      </p>
+
+      <h3>Q: Does it work with my existing Maven Site setup?</h3>
+      <p>
+        A: Yes! The TOC is designed to integrate seamlessly with Maven Site. Just use the provided Velocity macros.
+      </p>
+
+      <h3>Q: Is it accessible?</h3>
+      <p>
+        A: Absolutely! The TOC is WCAG AA compliant with full keyboard navigation and screen reader support.
+      </p>
+
+      <h3>Q: Can I disable smooth scrolling?</h3>
+      <p>
+        A: Yes, set <code>smoothScroll: false</code> in the configuration.
+      </p>
+
+      <h3>Q: What file sizes are we talking about?</h3>
+      <p>
+        A: The JavaScript is ~3.5KB minified, and the CSS is ~2KB minified. Both are very lightweight.
+      </p>
+
+      <h2 id="next-steps">Next Steps</h2>
+
+      <p>Now that you understand the TOC feature, you can:</p>
+
+      <ol>
+        <li>Add it to your Maven Skin templates</li>
+        <li>Customize the styling to match your brand</li>
+        <li>Configure options for your specific use case</li>
+        <li>Test across different devices and browsers</li>
+        <li>Monitor user feedback and improve</li>
+      </ol>
+
+      <div class="highlight-box">
+        <p>
+          💡 <strong>Tip:</strong> Start with the default configuration and customize only what you need.
+          The defaults are optimized for most use cases.
+        </p>
+      </div>
+    </main>
+
+    <footer>
+      <p>Table of Contents Feature for Maven Skin • Licensed under MIT</p>
+    </footer>
+  </div>
+
+  <script src="js/toc-generator.js"></script>
+  <script>
+    // Initialize TOC with custom options
+    TOCGenerator.init({
+      headingSelector: 'h2, h3',
+      containerSelector: '#toc',
+      minHeadings: 2,
+      smoothScroll: true,
+      highlightActiveSection: true
+    });
+  </script>
+</body>
+</html>
