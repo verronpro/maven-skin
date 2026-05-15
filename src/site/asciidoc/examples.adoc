@@ -48,7 +48,7 @@ my-project/
 * Maintain consistent naming conventions
 * One topic per file
 
-## AsciiDoc Examples
+== AsciiDoc Examples
 
 === Basic Document Structure
 
@@ -281,7 +281,7 @@ is built using Maven Skin itself!
 * Dark/light mode switching
 * Automatic deployment workflow
 
-## Best Practices
+== Best Practices
 
 === Documentation Organization
 
@@ -357,7 +357,7 @@ git push origin docs-v1.0
 # Set up separate GitHub Pages for this branch
 ----
 
-## Common Patterns
+== Common Patterns
 
 === Installation Instructions
 
@@ -462,7 +462,7 @@ server:
 ----
 ----
 
-## Maintenance
+== Maintenance
 
 === Keeping Documentation Current
 
@@ -496,7 +496,7 @@ git push origin main
 # Visit: https://your-domain.com
 ----
 
-## Tools and Resources
+== Tools and Resources
 
 === AsciiDoc Tools
 
@@ -554,12 +554,12 @@ Welcome to {project-name}!
 
 [source,asciidoc]
 ----
-include::../code-examples/HelloWorld.java[]
+\include::../code-examples/HelloWorld.java[]
 ----
 
 This helps keep documentation and code examples in sync.
 
-## Next Steps
+== Next Steps
 
 1. Create your first documentation page
 2. Set up local site generation: `mvn clean site`
