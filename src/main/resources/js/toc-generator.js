@@ -9,7 +9,7 @@
   const TOCGenerator = {
     // Configuration
     config: {
-      headingSelector: 'h2, h3, h4, h5, h6',
+      headingSelector: 'article h2, article h3, article h4, article h5, article h6',
       containerSelector: '.toc-container',
       minHeadings: 3,
       smoothScroll: true,
@@ -22,7 +22,7 @@
      */
     init: function(options) {
       this.config = Object.assign(this.config, options || {});
-      
+
       if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', () => this.generate());
       } else {
@@ -35,7 +35,7 @@
      */
     generate: function() {
       const headings = this.extractHeadings();
-      
+
       if (headings.length < this.config.minHeadings) {
         return;
       }
@@ -104,13 +104,13 @@
             const newUl = document.createElement('ul');
             const newLi = document.createElement('li');
             newLi.appendChild(newUl);
-            
+
             if (stack[stack.length - 1].list.lastChild) {
               stack[stack.length - 1].list.lastChild.appendChild(newUl);
             } else {
               stack[stack.length - 1].list.appendChild(newLi);
             }
-            
+
             stack.push({ level: i + 1, list: newUl });
           }
           currentList = stack[stack.length - 1].list;
@@ -134,13 +134,13 @@
      */
     injectTOC: function(tocList) {
       const container = document.querySelector(this.config.containerSelector);
-      
+
       if (!container) {
         // If no container specified, create one at the beginning of main content
-        const mainContent = document.querySelector('main') || 
-                          document.querySelector('article') || 
+        const mainContent = document.querySelector('main') ||
+                          document.querySelector('article') ||
                           document.querySelector('.content');
-        
+
         if (!mainContent) {
           return;
         }

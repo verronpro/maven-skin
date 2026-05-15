@@ -3,23 +3,16 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    
+
     <modelVersion>4.0.0</modelVersion>
     <groupId>pro.verron</groupId>
     <artifactId>maven-skin</artifactId>
-    <version>1.0.5</version>
+    <version>1.0.6</version>
     <name>maven-skin</name>
     <packaging>jar</packaging>
     <description>Maven site blog-like skin for verron.pro domain</description>
     <url>https://maven-skin.verron.pro</url>
-         
-    <licenses>
-        <license>
-            <name>MIT</name>
-            <url>LICENSE</url>
-        </license>
-    </licenses>
-  
+
     <developers>
         <developer>
             <email>joseph@verron.pro</email>
@@ -33,7 +26,7 @@
             <timezone>Beijing</timezone>
         </developer>
     </developers>
-    
+
     <scm>
         <connection>scm:git:https://github.com/verronpro/maven-skin.git</connection>
         <developerConnection>scm:git:git@github.com:verronpro/maven-skin.git</developerConnection>
@@ -51,10 +44,10 @@
             <url>LICENSE</url>
         </license>
     </licenses>
-         
+
     <properties>
         <maven.compiler.release>25</maven.compiler.release>
-        <maven.compiler.source>25/maven.compiler.source>
+        <maven.compiler.source>25</maven.compiler.source>
         <maven.compiler.target>25</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.report.outputEncoding>UTF-8</project.report.outputEncoding>
@@ -69,7 +62,7 @@
             <url>https://maven-skin.verron.pro</url>
         </site>
     </distributionManagement>
-         
+
     <build>
         <plugins>
             <plugin>
@@ -148,7 +141,7 @@
                 </configuration>
             </plugin>
         </plugins>
-        <pluginManagement>     
+        <pluginManagement>
             <plugins>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -213,7 +206,7 @@
             </plugin>
         </plugins>
     </reporting>
-         
+
     <profiles>
         <profile>
             <id>gpg</id>
