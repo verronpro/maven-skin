@@ -1,0 +1,493 @@
+= Installation Guide
+:toc:
+:toclevels: 2
+
+Detailed installation and configuration guide for Maven Skin.
+
+== System Requirements
+
+=== Mandatory
+* **Maven**: 3.9+ (latest recommended)
+* **Java**: 21+ (LTS version recommended)
+* **Modern Web Browser**: Chrome, Firefox, Safari, or Edge (for viewing generated site)
+
+=== Optional
+* **Git**: For version control (if deploying to GitHub Pages)
+* **GitHub Account**: For hosting documentation on GitHub Pages
+
+=== Verify Installation
+
+Check your Maven version:
+[source,bash]
+----
+mvn --version
+----
+
+Expected output:
+[source]
+----
+Apache Maven 3.9.x (or later)
+...
+----
+
+Check your Java version:
+[source,bash]
+----
+java --version
+----
+
+Expected output:
+[source]
+----
+java 21.x (or later)
+...
+----
+
+If either version is too old, please upgrade before proceeding.
+
+== Basic Installation
+
+=== Single-Module Project
+
+For a project with a single `pom.xml`:
+
+[source,xml]
+----
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
+         http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.example</groupId>
+  <artifactId>my-project</artifactId>
+  <version>1.0</version>
+  <name>My Project</name>
+  <url>https://example.com</url>
+
+  <!-- Add the Maven Skin here -->
+  <skin>
+    <groupId>pro.verron</groupId>
+    <artifactId>maven-skin</artifactId>
+    <version>1.0</version>
+  </skin>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-site-plugin</artifactId>
+        <version>3.21.0</version>
+      </plugin>
+    </plugins>
+  </build>
+</project>
+----
+
+=== Multi-Module Project
+
+For projects with multiple modules, add the skin to the parent `pom.xml`:
+
+[source,xml]
+----
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
+         http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.example</groupId>
+  <artifactId>my-project-parent</artifactId>
+  <version>1.0</version>
+  <packaging>pom</packaging>
+  <name>My Project</name>
+  <url>https://example.com</url>
+
+  <modules>
+    <module>module1</module>
+    <module>module2</module>
+  </modules>
+
+  <!-- Add the Maven Skin in parent -->
+  <skin>
+    <groupId>pro.verron</groupId>
+    <artifactId>maven-skin</artifactId>
+    <version>1.0</version>
+  </skin>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-site-plugin</artifactId>
+        <version>3.21.0</version>
+      </plugin>
+    </plugins>
+  </build>
+</project>
+----
+
+== Configuration
+
+=== Basic Site Configuration
+
+Create `src/site/site.xml` to configure your site's navigation:
+
+[source,xml]
+----
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="My Project" xmlns="http://maven.apache.org/DECORATION/1.8.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/DECORATION/1.8.0 
+         http://maven.apache.org/xsd/decoration-1.8.0.xsd">
+
+  <body>
+    <menu name="Documentation">
+      <item name="Home" href="index.html"/>
+      <item name="Getting Started" href="getting-started.html"/>
+      <item name="Installation" href="installation.html"/>
+      <item name="Examples" href="examples.html"/>
+    </menu>
+
+    <menu name="Community">
+      <item name="GitHub" href="https://github.com/yourname/yourproject"/>
+      <item name="Issues" href="https://github.com/yourname/yourproject/issues"/>
+    </menu>
+  </body>
+</project>
+----
+
+=== Maven Site Plugin Configuration
+
+Add this to your `pom.xml` `<build><plugins>` section:
+
+[source,xml]
+----
+<plugin>
+  <groupId>org.apache.maven.plugins</groupId>
+  <artifactId>maven-site-plugin</artifactId>
+  <version>3.21.0</version>
+  <configuration>
+    <generateSitemap>true</generateSitemap>
+    <asciidoc>
+      <attributes>
+        <source-highlighter>coderay</source-highlighter>
+        <coderay-css>style</coderay-css>
+      </attributes>
+    </asciidoc>
+  </configuration>
+  <dependencies>
+    <dependency>
+      <groupId>org.apache.maven.reporting</groupId>
+      <artifactId>maven-reporting-exec</artifactId>
+      <version>2.0.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.asciidoctor</groupId>
+      <artifactId>asciidoctor-maven-plugin</artifactId>
+      <version>3.2.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.asciidoctor</groupId>
+      <artifactId>asciidoctor-parser-doxia-module</artifactId>
+      <version>3.2.0</version>
+    </dependency>
+  </dependencies>
+</plugin>
+----
+
+== Local Site Generation
+
+=== Generate Your Site
+
+[source,bash]
+----
+mvn clean site
+----
+
+Maven will:
+* Clean previous build artifacts
+* Generate documentation from `src/site/asciidoc/`
+* Apply Maven Skin styling
+* Create the site in `target/site/`
+
+=== View Locally
+
+[source,bash]
+----
+# macOS
+open target/site/index.html
+
+# Linux
+xdg-open target/site/index.html
+
+# Windows
+start target/site/index.html
+----
+
+Or open `target/site/index.html` manually in your browser.
+
+== GitHub Pages Deployment
+
+[[github-pages]]
+
+Maven Skin includes a ready-to-use GitHub Actions workflow for automatic deployment to GitHub Pages.
+
+=== Setup
+
+==== 1. Add the Workflow File
+
+Create `.github/workflows/pages.yml`:
+
+[source,yaml]
+----
+name: Deploy Site
+
+on:
+  push:
+    branches: ["main"]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-java@v5
+        with:
+          java-version: 25
+          distribution: 'temurin'
+          cache: 'maven'
+
+      - run: mvn -B -ntp verify site site:stage -Dhttp.keepAlive=false -Dmaven.wagon.http.pool=false -Dmaven.wagon.httpconnectionManager.ttlSeconds=120
+
+      - uses: actions/configure-pages@v6
+
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: 'target/staging'
+
+      - uses: actions/deploy-pages@v5
+----
+
+==== 2. Enable GitHub Pages
+
+In your GitHub repository:
+
+1. Go to **Settings** → **Pages**
+2. Under "Build and deployment", select "GitHub Actions"
+3. The workflow will automatically deploy to the `gh-pages` branch
+
+==== 3. Test the Workflow
+
+Push to `main` branch:
+
+[source,bash]
+----
+git add .github/workflows/pages.yml
+git commit -m "Add GitHub Pages deployment workflow"
+git push origin main
+----
+
+Visit GitHub repository **Actions** tab to see the workflow run.
+
+After successful deployment, your site will be available at:
+
+* Default: `https://<username>.github.io/<repo-name>`
+* With custom domain: `https://maven-skin.verron.pro` (after DNS setup)
+
+=== Custom Domain Setup
+
+[[custom-domain]]
+
+To use a custom domain like `maven-skin.verron.pro`:
+
+==== 1. DNS Configuration
+
+Point your domain to GitHub Pages:
+
+**Option A: Using A Records (IPv4)**
+[source]
+----
+A       185.199.108.153
+A       185.199.109.153
+A       185.199.110.153
+A       185.199.111.153
+----
+
+**Option B: Using ALIAS/ANAME Record (recommended)**
+[source]
+----
+ALIAS/ANAME  yourusername.github.io
+----
+
+==== 2. GitHub Pages Settings
+
+In your GitHub repository:
+
+1. Go to **Settings** → **Pages**
+2. Under "Custom domain", enter your domain: `maven-skin.verron.pro`
+3. Check "Enforce HTTPS" (recommended)
+4. GitHub will automatically create a `CNAME` file in your repository
+
+==== 3. Verify DNS
+
+After 10-15 minutes, verify DNS resolution:
+
+[source,bash]
+----
+dig maven-skin.verron.pro
+nslookup maven-skin.verron.pro
+----
+
+Your site should now be accessible at your custom domain!
+
+== Performance Tuning
+
+=== Build Time Optimization
+
+For faster site generation:
+
+[source,bash]
+----
+# Generate site without reports
+mvn site -DskipReports=true
+
+# Generate in offline mode (if dependencies cached)
+mvn site -o
+
+# Use parallel builds
+mvn site -T 1C
+----
+
+=== Browser Caching
+
+The generated site uses modern caching strategies:
+
+* CSS and JavaScript files are minified
+* Static assets have long cache headers
+* No external dependencies for core functionality
+
+=== Response Size
+
+Maven Skin is lightweight:
+
+* Minimal CSS (~20KB gzipped)
+* Minimal JavaScript (~10KB gzipped)
+* No heavy frameworks or dependencies
+
+== Troubleshooting
+
+=== Build Errors
+
+**Error: "Cannot find descriptor for mojo 'org.apache.maven.plugins:maven-site-plugin:...'**
+
+Solution: Update Maven Site Plugin:
+[source,bash]
+----
+mvn versions:display-dependency-updates
+mvn clean install
+----
+
+=== Site Generation Issues
+
+**Error: "Executing copy-resources failed"**
+
+Solution: Check file permissions and paths:
+[source,bash]
+----
+# Ensure src/site directory exists
+mkdir -p src/site/asciidoc
+
+# Clean and rebuild
+mvn clean site
+----
+
+=== GitHub Pages Not Updating
+
+**Issue: Changes don't appear on GitHub Pages**
+
+Solutions:
+1. Wait 2-3 minutes for deployment
+2. Check **Actions** tab for workflow status
+3. Verify custom domain CNAME file exists
+4. Clear browser cache
+5. Try incognito/private browser window
+
+=== Deployment Workflow Fails
+
+**Check the workflow logs:**
+
+1. Go to your GitHub repository
+2. Click **Actions** tab
+3. Click on the failed workflow run
+4. Review the logs for error messages
+
+Common causes:
+* Maven build failure (check `mvn site` locally)
+* GitHub Pages disabled (check Settings → Pages)
+* Insufficient permissions (check workflow permissions)
+
+== Updates and Maintenance
+
+=== Update Maven Skin
+
+To update to a newer version:
+
+[source,xml]
+----
+<skin>
+  <groupId>pro.verron</groupId>
+  <artifactId>maven-skin</artifactId>
+  <version>1.1</version>  <!-- Update version number -->
+</skin>
+----
+
+Then rebuild:
+[source,bash]
+----
+mvn clean site
+----
+
+=== Clear Cache
+
+If you experience odd styling issues after update:
+
+[source,bash]
+----
+# Remove Maven cache
+rm -rf ~/.m2/repository/pro/verron/maven-skin
+
+# Remove site build
+mvn clean
+
+# Rebuild
+mvn site
+
+# Clear browser cache (Ctrl+Shift+Delete or Cmd+Shift+Delete)
+----
+
+== Next Steps
+
+* See link:getting-started.html[Getting Started] for quick setup
+* See link:examples.html[Examples] for documentation patterns
+* Create your first documentation page in `src/site/asciidoc/index.adoc`
+* Deploy to GitHub Pages with automatic workflow
+
+Happy documenting! 📚
