@@ -1,0 +1,257 @@
+= Maven Skin
+Joseph Verron
+:toc:
+:toclevels: 3
+
+A modern, tech-blog styled Maven site skin designed for open-source developers.
+Maven Skin brings a contemporary look to your Maven documentation with dark/light mode support,
+fully responsive design, and automated table of contents generation.
+
+== Features
+
+=== Modern Design
+- **Tech-Blog Style**: Clean, minimalist design inspired by modern tech blogs
+- **Dark/Light Mode**: Automatic theme switching to match system preferences or user selection
+- **Responsive Layout**: Beautiful on mobile phones, tablets, and desktop screens
+- **Report Tables**: Properly formatted responsive tables for Maven reports (test reports, coverage, etc.)
+
+=== Developer-Friendly
+- **Automatic Table of Contents**: Generate a dynamic TOC for any page automatically
+- **AsciiDoc First**: Built with AsciiDoc users in mind
+- **Configurable Colors**: Theme colors can be customized to match your project's branding
+- **Pluggable Elements**: Enable or disable UI elements easily
+
+=== Performance & Accessibility
+- **Lightweight**: Minimal dependencies and fast loading
+- **Semantic HTML**: Proper semantic markup for accessibility
+- **SEO Ready**: Sitemap generation and proper metadata support
+
+== Quick Start
+
+=== Prerequisites
+- Maven 3.9+ (latest version recommended)
+- Java 21+
+
+=== Installation
+
+Add the Maven Skin dependency to your project's `pom.xml`:
+
+[source,xml]
+----
+<project>
+  <skin>
+    <groupId>pro.verron</groupId>
+    <artifactId>maven-skin</artifactId>
+    <version>1.0</version>
+  </skin>
+</project>
+----
+
+That's it! Your Maven site will now use the modern Maven Skin theme.
+
+=== Configuration
+
+Basic Maven site configuration in your `pom.xml`:
+
+[source,xml]
+----
+<project>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-site-plugin</artifactId>
+        <version>3.21.0</version>
+        <configuration>
+          <generateSitemap>true</generateSitemap>
+          <asciidoc>
+            <attributes>
+              <source-highlighter>coderay</source-highlighter>
+            </attributes>
+          </asciidoc>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+  <skin>
+    <groupId>pro.verron</groupId>
+    <artifactId>maven-skin</artifactId>
+    <version>1.0</version>
+  </skin>
+</project>
+----
+
+== Usage Examples
+
+=== Basic Documentation Site
+
+Create `src/site/asciidoc/index.adoc`:
+
+[source,asciidoc]
+----
+= My Project
+:toc:
+
+== Getting Started
+
+Welcome to my project!
+
+=== Installation
+
+Follow these steps...
+
+=== Quick Example
+
+Here's how to use it:
+----
+
+Run: `mvn site`
+
+=== With Dark/Light Mode
+
+The skin automatically includes dark/light mode toggle. Users can:
+
+- Click the theme toggle button to switch themes
+- The preference is saved in their browser
+- System preference is used by default
+
+=== Using the Automated Table of Contents
+
+Simply add the `:toc:` attribute to your AsciiDoc files:
+
+[source,asciidoc]
+----
+= Document Title
+:toc:
+:toclevels: 3
+
+Your content here...
+----
+
+The skin will automatically generate and display a navigable table of contents.
+
+=== Responsive Tables for Reports
+
+Maven Skin automatically handles report tables responsively:
+
+- Test reports display correctly on mobile with horizontal scrolling
+- Code coverage tables adapt to screen size
+- Project info is properly formatted on all devices
+
+== Real-World Examples
+
+=== Office-Stamper
+
+Office-Stamper, a template engine for creating DOCX documents, successfully uses Maven Skin.
+Visit https://office-stamper.verron.pro[office-stamper.verron.pro] to see it in action.
+
+The project demonstrates:
+- Comprehensive AsciiDoc documentation
+- Multiple modules with clear navigation
+- Professional appearance for an open-source project
+
+=== Maven Skin Self-Documentation
+
+This very documentation uses Maven Skin! You can see the theme in action at
+https://maven-skin.verron.pro[maven-skin.verron.pro].
+
+=== Verron.pro Blog
+
+The main blog at https://verron.pro[verron.pro] uses a compatible Jekyll-based CSS style,
+providing a consistent look across the Verron ecosystem.
+
+== Customization
+
+=== Theme Colors
+
+*(Coming in future releases)* You'll be able to customize theme colors by:
+
+[source,xml]
+----
+<plugin>
+  <groupId>org.apache.maven.plugins</groupId>
+  <artifactId>maven-site-plugin</artifactId>
+  <configuration>
+    <skin>
+      <colors>
+        <primary>#007bff</primary>
+        <secondary>#6c757d</secondary>
+        <accent>#28a745</accent>
+      </colors>
+    </skin>
+  </configuration>
+</plugin>
+----
+
+=== Enabling/Disabling Features
+
+*(Coming in future releases)* Control which UI elements appear:
+
+[source,xml]
+----
+<configuration>
+  <skin>
+    <features>
+      <tableOfContents>true</tableOfContents>
+      <darkModeToggle>true</darkModeToggle>
+      <searchBox>true</searchBox>
+      <breadcrumb>true</breadcrumb>
+    </features>
+  </skin>
+</configuration>
+----
+
+== Supported Maven Versions
+
+Maven Skin supports **the latest version of Maven only** (currently 3.9+).
+
+If you're using an older Maven version, you can:
+
+- Upgrade to the latest Maven version
+- Use a previous version of Maven Skin that supports your Maven version
+  (older skin versions will be maintained for historical support)
+
+We recommend upgrading to the latest Maven version for better performance, security, and features.
+
+== Project Status
+
+Maven Skin is in active development. The current focus is on:
+
+1. ✅ Basic modern theme
+2. ✅ Dark/light mode support
+3. ✅ Responsive design
+4. ✅ AsciiDoc integration
+5. 🔄 Configurable theme colors (in progress)
+6. 🔄 Pluggable UI elements (in progress)
+7. 📋 Extended customization options (planned)
+
+## Contributing
+
+We welcome contributions! The project is hosted on GitHub at
+https://github.com/verronpro/maven-skin[verronpro/maven-skin].
+
+You can:
+
+- Report issues and suggest features
+- Submit pull requests with improvements
+- Help improve documentation
+- Test with your Maven projects and provide feedback
+
+## License
+
+Maven Skin is licensed under the MIT License. See the LICENSE file for details.
+
+## Support
+
+For questions, issues, or suggestions:
+
+- 🐛 **Report issues**: https://github.com/verronpro/maven-skin/issues[GitHub Issues]
+- 💬 **Discussions**: https://github.com/verronpro/maven-skin/discussions[GitHub Discussions]
+- 📧 **Email**: joseph@verron.pro
+
+## See Also
+
+- https://verron.pro[Verron.pro Blog] - Tech blog using compatible styling
+- https://office-stamper.verron.pro[Office-Stamper] - Document template engine using Maven Skin
+- https://maven.apache.org/guides/introduction/introduction-to-the-standard-directory-layout.html[Maven Site Documentation]
