@@ -1,0 +1,215 @@
+= Getting Started with Maven Skin
+:toc:
+:toclevels: 2
+
+Get your Maven site running with Maven Skin in just 5 minutes!
+
+== Prerequisites
+
+Before you start, make sure you have:
+
+* **Maven 3.9 or later** - Check with `mvn --version`
+* **Java 21 or later** - Check with `java --version`
+* A Maven project with a `pom.xml` file
+* A modern web browser (Chrome, Firefox, Safari, Edge)
+
+If you don't have Maven installed, download it from https://maven.apache.org/download.cgi[maven.apache.org].
+
+== 5-Minute Quick Start
+
+=== Step 1: Open your pom.xml
+
+Locate your project's `pom.xml` file in your project root directory.
+
+=== Step 2: Add the Maven Skin
+
+Inside the `<project>` element, add the skin configuration:
+
+[source,xml]
+----
+<skin>
+  <groupId>pro.verron</groupId>
+  <artifactId>maven-skin</artifactId>
+  <version>1.0</version>
+</skin>
+----
+
+Your pom.xml should now look similar to:
+
+[source,xml]
+----
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
+         http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.example</groupId>
+  <artifactId>my-project</artifactId>
+  <version>1.0</version>
+  <name>My Project</name>
+  <description>My awesome project</description>
+
+  <skin>
+    <groupId>pro.verron</groupId>
+    <artifactId>maven-skin</artifactId>
+    <version>1.0</version>
+  </skin>
+</project>
+----
+
+=== Step 3: Generate Your Site
+
+Run Maven site generation:
+
+[source,bash]
+----
+mvn clean site
+----
+
+Maven will download Maven Skin and generate your site.
+
+=== Step 4: View Your Site
+
+Open the generated site in your browser:
+
+[source,bash]
+----
+# On macOS
+open target/site/index.html
+
+# On Linux
+xdg-open target/site/index.html
+
+# On Windows
+start target/site/index.html
+----
+
+Or manually open `target/site/index.html` in your web browser.
+
+=== Step 5: Explore the Features
+
+* 🌓 **Toggle Dark/Light Mode** - Click the theme button in the top-right corner
+* 📱 **Try Responsive Design** - Resize your browser window or view on mobile
+* 📖 **View Table of Contents** - Scroll down to see the auto-generated TOC
+
+That's it! You now have a modern Maven site! 🎉
+
+== Next Steps
+
+=== 1. Create Documentation
+
+Add AsciiDoc pages to your site:
+
+Create `src/site/asciidoc/my-page.adoc`:
+
+[source,asciidoc]
+----
+= My Page Title
+:toc:
+
+This is my page content.
+
+== Section 1
+
+Some content here.
+
+== Section 2
+
+More content.
+----
+
+Then run `mvn site` again and your page will appear in the navigation.
+
+=== 2. Configure Navigation
+
+Create or edit `src/site/site.xml` to customize navigation:
+
+[source,xml]
+----
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="My Project" xmlns="http://maven.apache.org/DECORATION/1.8.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/DECORATION/1.8.0 
+         http://maven.apache.org/xsd/decoration-1.8.0.xsd">
+
+  <body>
+    <menu name="Documentation">
+      <item name="Home" href="index.html"/>
+      <item name="My Page" href="my-page.html"/>
+      <item name="GitHub" href="https://github.com/yourname/yourproject"/>
+    </menu>
+  </body>
+</project>
+----
+
+=== 3. Deploy to GitHub Pages
+
+See the link:installation.html#github-pages[Installation Guide] for automatic GitHub Pages deployment.
+
+=== 4. Learn More
+
+* **Detailed Setup**: See the link:installation.html[Installation Guide]
+* **Examples & Best Practices**: See link:examples.html[Examples]
+* **AsciiDoc Documentation**: https://asciidoctor.org/docs/user-manual/[Asciidoctor Manual]
+
+== Common Issues
+
+=== "Maven could not find the skin"
+
+**Problem**: You see an error about not finding `pro.verron:maven-skin`.
+
+**Solution**: Make sure Maven Skin is published to Maven Central. Check that:
+* You have internet connectivity
+* Your `pom.xml` syntax is correct
+* The version number is correct
+
+Try running: `mvn help:describe -Dgroupid=pro.verron -Dartifactid=maven-skin`
+
+=== "Site looks ugly / no styling"
+
+**Problem**: Your site appears without the modern theme.
+
+**Solution**: 
+* Try deleting the `target` folder and running `mvn clean site` again
+* Clear your browser cache (Ctrl+Shift+Delete or Cmd+Shift+Delete)
+* Try a different browser
+
+=== "Page not found" error
+
+**Problem**: Getting 404 errors for pages.
+
+**Solution**:
+* Make sure your `.adoc` files are in `src/site/asciidoc/`
+* File names should match the href in `site.xml`
+* Run `mvn clean site` after adding new files
+
+=== Dark mode not toggling
+
+**Problem**: Theme toggle button doesn't work.
+
+**Solution**:
+* Make sure JavaScript is enabled in your browser
+* Try a different browser
+* Check browser console for errors (F12)
+
+== Getting Help
+
+If you're stuck:
+
+1. **Check the link:examples.html[Examples]** - Your question might already be answered
+2. **Read link:installation.html[Installation Guide]** - More detailed setup information
+3. **Ask on GitHub**: https://github.com/verronpro/maven-skin/discussions[GitHub Discussions]
+4. **Report Issues**: https://github.com/verronpro/maven-skin/issues[GitHub Issues]
+
+== You're Ready!
+
+You've successfully set up Maven Skin! 🚀
+
+Now you can:
+* Add your documentation
+* Deploy to GitHub Pages
+* Share your beautiful Maven site with the world
+
+See link:installation.html[Installation Guide] for more advanced setup options like GitHub Pages deployment and custom domains.
