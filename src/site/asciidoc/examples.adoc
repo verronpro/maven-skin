@@ -1,0 +1,570 @@
+= Examples & Best Practices
+:toc:
+:toclevels: 2
+
+Real-world examples and best practices for using Maven Skin.
+
+== Project Structure
+
+=== Recommended Directory Layout
+
+[source]
+----
+my-project/
+├── pom.xml
+├── src/
+│   ├── main/
+│   │   └── java/
+│   ├── test/
+│   │   └── java/
+│   └── site/
+│       ├── site.xml
+│       ├── asciidoc/
+│       │   ├── index.adoc
+│       │   ├── getting-started.adoc
+│       │   ├── installation.adoc
+│       │   ├── usage/
+│       │   │   ├── basic.adoc
+│       │   │   └── advanced.adoc
+│       │   └── api/
+│       │       └── reference.adoc
+│       ├── resources/
+│       │   └── images/
+│       │       └── logo.png
+│       └── markdown/
+│           └── other-format.md
+├── .github/
+│   └── workflows/
+│       └── pages.yml
+└── target/
+    └── site/  (generated)
+----
+
+=== File Organization Best Practices
+
+**Keep it organized:**
+* Group related pages in subdirectories
+* Use descriptive file names
+* Maintain consistent naming conventions
+* One topic per file
+
+## AsciiDoc Examples
+
+=== Basic Document Structure
+
+[source,asciidoc]
+----
+= Document Title
+Author Name
+:toc:
+:toclevels: 3
+:source-highlighter: coderay
+
+== Introduction
+
+This is the introduction section.
+
+=== Subsection
+
+More details here.
+
+== Main Section
+
+Content for main section.
+
+=== Code Example
+
+[source,java]
+----
+public class Hello {
+    public static void main(String[] args) {
+        System.out.println("Hello, World!");
+    }
+}
+----
+
+=== Lists
+
+* Item 1
+* Item 2
+  ** Nested item
+  ** Another nested
+
+. First
+. Second
+. Third
+
+== See Also
+
+* link:other-page.html[Other Page]
+* https://example.com[External Link]
+----
+
+=== Tables
+
+[source,asciidoc]
+----
+== Feature Comparison
+
+|===
+| Feature | Maven Skin | Other Skin
+
+| Dark Mode
+| ✓
+| ✗
+
+| Responsive
+| ✓
+| ✓
+
+| AsciiDoc
+| ✓
+| ✗
+
+| Modern Design
+| ✓
+| ✗
+|===
+----
+
+Renders as:
+
+|===
+| Feature | Maven Skin | Other Skin
+
+| Dark Mode
+| ✓
+| ✗
+
+| Responsive
+| ✓
+| ✓
+
+| AsciiDoc
+| ✓
+| ✗
+
+| Modern Design
+| ✓
+| ✗
+|===
+
+=== Code Blocks with Syntax Highlighting
+
+Java:
+[source,asciidoc]
+----
+[source,java]
+----
+public class Calculator {
+    public int add(int a, int b) {
+        return a + b;
+    }
+}
+----
+----
+
+XML:
+[source,asciidoc]
+----
+[source,xml]
+----
+<project>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.example</groupId>
+  <artifactId>my-app</artifactId>
+</project>
+----
+----
+
+JSON:
+[source,asciidoc]
+----
+[source,json]
+----
+{
+  "name": "my-project",
+  "version": "1.0.0",
+  "description": "A great project"
+}
+----
+----
+
+Bash:
+[source,asciidoc]
+----
+[source,bash]
+----
+#!/bin/bash
+echo "Hello, World!"
+mvn clean install
+----
+----
+
+=== Cross-References and Links
+
+[source,asciidoc]
+----
+== Getting Started
+
+See link:getting-started.html[Getting Started Guide].
+
+Or link:installation.html#custom-domain[Custom Domain Setup].
+
+External: https://example.com[Example Website]
+
+Relative: xref:../other-page.adoc[Other Page]
+----
+
+=== Admonitions (Notes, Warnings, Tips)
+
+[source,asciidoc]
+----
+NOTE: This is something to note.
+
+WARNING: Be careful with this!
+
+TIP: Here's a helpful tip.
+
+IMPORTANT: This is really important.
+
+CAUTION: Proceed with caution!
+----
+
+== Real-World Examples
+
+=== Office-Stamper Example
+
+Office-Stamper uses Maven Skin for its documentation.
+Visit https://office-stamper.verron.pro[office-stamper.verron.pro] to see it in action.
+
+**Key features demonstrated:**
+
+* Multi-section documentation
+* API reference pages
+* Getting started guides
+* Real code examples
+* Professional appearance
+
+**Site structure:**
+
+[source]
+----
+office-stamper/
+├── src/site/
+│   ├── site.xml
+│   └── asciidoc/
+│       ├── index.adoc (Homepage)
+│       ├── getting-started.adoc
+│       ├── api-documentation.adoc
+│       ├── examples/
+│       │   ├── basic-usage.adoc
+│       │   ├── advanced-features.adoc
+│       │   └── troubleshooting.adoc
+│       └── resources/
+│           └── images/
+│               └── workflow-diagram.png
+└── .github/workflows/
+    └── pages.yml (Auto-deployment)
+----
+
+=== Maven Skin Self-Documentation
+
+This Maven Skin documentation at https://maven-skin.verron.pro[maven-skin.verron.pro]
+is built using Maven Skin itself!
+
+**Demonstrates:**
+
+* Clean, organized structure
+* Multiple guides and tutorials
+* Responsive tables and code blocks
+* Dark/light mode switching
+* Automatic deployment workflow
+
+## Best Practices
+
+=== Documentation Organization
+
+**Do:**
+✓ Group related topics together
+✓ Use descriptive titles
+✓ Keep sections focused and concise
+✓ Link related pages
+✓ Provide examples
+
+**Don't:**
+✗ Mix unrelated topics in one page
+✗ Use vague titles
+✗ Create overly long pages
+✗ Leave broken links
+✗ Forget to update old documentation
+
+=== Writing for Mobile
+
+Maven Skin is responsive. When writing documentation:
+
+* Use shorter paragraphs
+* Use descriptive headers (helps screen readers)
+* Avoid very wide code lines
+* Use tables sparingly (stack on mobile)
+* Test locally with `mvn site` and check mobile rendering
+
+=== Dark Mode Considerations
+
+Content looks good in both themes:
+
+* Avoid hardcoding colors in images
+* Use high contrast for text
+* Use semantic HTML (provided by AsciiDoc)
+* Test both light and dark modes
+* Don't rely on color alone to convey information
+
+Example: Instead of "Click the *red* button", use "Click the *Send* button".
+
+=== Performance Optimization
+
+**Optimize your site:**
+
+* Keep images reasonably sized (~50-100KB each)
+* Use descriptive image names
+* Organize CSS and JavaScript efficiently
+* Minimize external dependencies
+* Use `<placeholder>` for large code examples
+* Link to large resources instead of embedding
+
+=== Versioning
+
+**Multiple documentation versions:**
+
+If you maintain multiple versions:
+
+[source,xml]
+----
+<!-- In site.xml -->
+<menu name="Documentation">
+  <item name="Latest (1.0)" href="/latest"/>
+  <item name="1.0" href="/docs/1.0"/>
+  <item name="0.9" href="/docs/0.9"/>
+</menu>
+----
+
+Or use GitHub branches:
+[source,bash]
+----
+git checkout -b docs-v1.0
+# Modify documentation
+git push origin docs-v1.0
+# Set up separate GitHub Pages for this branch
+----
+
+## Common Patterns
+
+=== Installation Instructions
+
+[source,asciidoc]
+----
+== Installation
+
+=== Prerequisites
+
+* Java 11+
+* Maven 3.6+
+
+=== Steps
+
+. Download from https://example.com[example.com]
+. Extract the archive
+. Run: `mvn clean install`
+. Verify: `mvn --version`
+
+=== Next Steps
+
+See link:getting-started.html[Getting Started Guide].
+----
+
+=== API Documentation
+
+[source,asciidoc]
+----
+== API Reference
+
+=== Class: MyService
+
+[source,java]
+----
+public class MyService {
+    /**
+     * Process the input data.
+     * @param input the input to process
+     * @return the processed result
+     */
+    public String process(String input) {
+        // ...
+    }
+}
+----
+
+.Parameters
+|===
+| Parameter | Type | Description
+
+| input
+| String
+| The data to process
+|===
+
+.Returns
+|===
+| Type | Description
+
+| String
+| The processed result
+|===
+
+.Example
+[source,java]
+----
+MyService service = new MyService();
+String result = service.process("data");
+----
+----
+
+=== Troubleshooting Guide
+
+[source,asciidoc]
+----
+== Troubleshooting
+
+=== Error: "Connection Refused"
+
+.Problem
+Your application fails to start with "Connection Refused" error.
+
+.Cause
+The port is already in use or the service is not running.
+
+.Solution
+. Check if the port is in use: `lsof -i :8080`
+. Kill the process using the port
+. Restart your application
+
+See <<configuration>> for port settings.
+
+[[configuration]]
+=== Configuration
+
+Configure the port in `application.yml`:
+
+[source,yaml]
+----
+server:
+  port: 8081
+----
+----
+
+## Maintenance
+
+=== Keeping Documentation Current
+
+**Set a schedule:**
+
+* Review documentation quarterly
+* Update examples with new versions
+* Fix broken links regularly
+* Archive old documentation
+* Encourage community contributions
+
+=== Content Update Workflow
+
+[source,bash]
+----
+# 1. Edit documentation
+vim src/site/asciidoc/my-page.adoc
+
+# 2. Test locally
+mvn clean site
+open target/site/index.html
+
+# 3. Commit changes
+git add src/site/
+git commit -m "Update documentation: added new section"
+
+# 4. Push to trigger deployment
+git push origin main
+
+# 5. Verify on GitHub Pages
+# Visit: https://your-domain.com
+----
+
+## Tools and Resources
+
+=== AsciiDoc Tools
+
+* https://asciidoctor.org/[Asciidoctor] - Official documentation
+* https://asciidoctor.org/docs/user-manual/[User Manual] - Complete reference
+* https://asciidoctor.org/docs/asciidoc-writers-guide/[Writer's Guide] - Best practices
+
+=== Maven Resources
+
+* https://maven.apache.org/plugins/maven-site-plugin/[Maven Site Plugin]
+* https://maven.apache.org/guides/[Maven Guides]
+
+=== Related Projects
+
+* https://office-stamper.verron.pro[Office-Stamper] - Document template engine
+* https://verron.pro[Verron.pro] - Blog with compatible styling
+
+== Tips & Tricks
+
+=== Automatic TOC
+
+Add to top of your document:
+[source,asciidoc]
+----
+:toc:
+:toclevels: 3
+----
+
+=== Code Block Callouts
+
+[source,asciidoc]
+----
+[source,java]
+----
+public class Hello {
+    System.out.println("Hello"); // <1>
+}
+----
+<1> This line prints the greeting
+----
+
+=== Attributes
+
+[source,asciidoc]
+----
+:project-name: My Project
+:version: 1.0.0
+
+== {project-name} v{version}
+
+Welcome to {project-name}!
+----
+
+=== Include External Files
+
+[source,asciidoc]
+----
+include::../code-examples/HelloWorld.java[]
+----
+
+This helps keep documentation and code examples in sync.
+
+## Next Steps
+
+1. Create your first documentation page
+2. Set up local site generation: `mvn clean site`
+3. Review the generated site in `target/site/`
+4. Deploy to GitHub Pages with the workflow
+5. Iterate and improve based on user feedback
+
+Happy documenting! 📚
