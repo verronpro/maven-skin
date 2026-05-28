@@ -8,11 +8,11 @@
 
 ## Files
 
-| File | Purpose | Size |
-|------|---------|------|
-| `toc-generator.js` | JavaScript engine | 3.5 KB |
-| `toc-styles.css` | Styling and responsive design | 2 KB |
-| `toc-macros.vm` | Velocity template macros | - |
+| File               | Purpose                       | Size   |
+|--------------------|-------------------------------|--------|
+| `toc-generator.js` | JavaScript engine             | 3.5 KB |
+| `toc-styles.css`   | Styling and responsive design | 2 KB   |
+| `toc-macros.vm`    | Velocity template macros      | -      |
 
 ## Features at a Glance
 
@@ -24,7 +24,7 @@
 ✅ WCAG AA accessible  
 ✅ Dark mode support  
 ✅ Keyboard navigation  
-✅ Print friendly  
+✅ Print friendly
 
 ## Configuration
 
@@ -98,23 +98,23 @@ TOCGenerator.init({
 
 ## Browser Support
 
-| Browser | Version | Support |
-|---------|---------|---------|
-| Chrome | 60+ | ✅ Full |
-| Firefox | 55+ | ✅ Full |
-| Safari | 12+ | ✅ Full |
-| Edge | 15+ | ✅ Full |
-| IE 11 | - | ⚠️ Basic |
+| Browser | Version | Support  |
+|---------|---------|----------|
+| Chrome  | 60+     | ✅ Full   |
+| Firefox | 55+     | ✅ Full   |
+| Safari  | 12+     | ✅ Full   |
+| Edge    | 15+     | ✅ Full   |
+| IE 11   | -       | ⚠️ Basic |
 
 ## Common Issues
 
-| Issue | Solution |
-|-------|----------|
-| TOC not appearing | Check `minHeadings` setting or page has enough headings |
-| Styling missing | Verify CSS file is loaded in Network tab |
-| Links not working | Ensure headings have IDs (auto-assigned if missing) |
-| Not scrolling smoothly | Check browser supports it or use polyfill |
-| Section not highlighting | Verify `highlightActiveSection: true` |
+| Issue                    | Solution                                                |
+|--------------------------|---------------------------------------------------------|
+| TOC not appearing        | Check `minHeadings` setting or page has enough headings |
+| Styling missing          | Verify CSS file is loaded in Network tab                |
+| Links not working        | Ensure headings have IDs (auto-assigned if missing)     |
+| Not scrolling smoothly   | Check browser supports it or use polyfill               |
+| Section not highlighting | Verify `highlightActiveSection: true`                   |
 
 ## Accessibility
 
