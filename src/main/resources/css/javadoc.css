@@ -1,0 +1,332 @@
+/* ============================================================
+   Javadoc stylesheet for Verron.pro Maven skin
+   https://github.com/verronpro/maven-skin
+   ============================================================ */
+
+/* ----------------------------------------------------------------------
+   1. GLOBAL VARIABLES
+   Mirror the skin’s CSS custom properties.
+   ---------------------------------------------------------------------- */
+:root {
+    /* Brand colors */
+    --cc-primary: rgba(0, 120, 0);
+    --cc-accent: rgba(0, 120, 0);
+    --cc-primary-05: rgba(0, 120, 0, 0.05);
+    --cc-primary-10: rgba(0, 120, 0, 0.10);
+
+    /* Solarized Light theme */
+    --cc-bg: #fdf6e3;
+    --cc-surface: #eee8d5;
+    --cc-text: #073642;
+    --cc-muted: #657b83;
+    --cc-border: #93a1a1;
+    --cc-blockquote-bg: var(--cc-primary-05);
+
+    /* Code blocks */
+    --code-bg: var(--cc-surface);
+    --code-fg: #073642;
+    --code-border: var(--cc-border);
+
+    /* Syntax highlighting (Solarized Light) */
+    --hl-comment: #93a1a1;
+    --hl-keyword: #859900;
+    --hl-name: var(--code-fg);
+    --hl-const: #b58900;
+    --hl-attr: #268bd2;
+    --hl-entity: #cb4b16;
+    --hl-error: #dc322f;
+    --hl-num: #d33682;
+    --hl-str: #2aa198;
+    --hl-op: #6c71c4;
+
+    /* Status colours for reports */
+    --st-success: #2aa198;
+    --st-failure: #dc322f;
+    --st-warning: #b58900;
+    --st-skipped: #93a1a1;
+
+    /* Javadoc‑specific variables */
+    --body-background: var(--cc-bg);
+    --body-color: var(--cc-text);
+    --link-color: var(--cc-primary);
+    --link-hover-color: var(--cc-accent);
+    --table-border-color: var(--cc-border);
+    --th-background: var(--cc-surface);
+    --pre-background: var(--cc-surface);
+    --pre-border: var(--cc-border);
+    --pre-color: var(--code-fg);
+    --hr-border: var(--cc-border);
+    --index-nav-link-color: var(--cc-primary);
+    --index-nav-link-hover: var(--cc-accent);
+    --search-background: var(--cc-surface);
+    --search-text: var(--cc-text);
+    --search-border: var(--cc-border);
+    --search-focus-outline: var(--cc-primary);
+}
+
+/* Dark mode – matches the skin’s dark theme */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --cc-primary: rgba(0, 209, 0);
+        --cc-accent: rgba(0, 209, 0);
+        --cc-primary-05: rgba(0, 209, 0, 0.05);
+        --cc-primary-10: rgba(0, 209, 0, 0.10);
+
+        --cc-text: #e6e6e6;
+        --cc-muted: #a3a3a3;
+        --cc-bg: #121212;
+        --cc-surface: #1c1c1c;
+        --cc-border: #2a2a2a;
+        --cc-blockquote-bg: var(--cc-primary-10);
+
+        --code-bg: #141414;
+        --code-fg: #e8e8e8;
+        --code-border: var(--cc-border);
+
+        --hl-keyword: #a3c400;
+        --hl-const: #e0b34b;
+        --hl-attr: #4ea4e0;
+        --hl-entity: #f0792b;
+        --hl-error: #ef4444;
+        --hl-num: #f472b6;
+        --hl-str: #33d1b6;
+        --hl-op: #9f86ff;
+
+        --st-success: #33d1b6;
+        --st-failure: #ef4444;
+        --st-warning: #e0b34b;
+        --st-skipped: #a3a3a3;
+    }
+}
+
+/* ----------------------------------------------------------------------
+   2. BASE STYLES
+   Override Javadoc’s default body styles.
+   ---------------------------------------------------------------------- */
+body {
+    background-color: var(--body-background);
+    color: var(--body-color);
+    font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial,
+    sans-serif;
+    font-size: 1rem;
+    line-height: 1.5;
+    margin: 0;
+    padding: 0;
+}
+
+/* Links */
+a:link {
+    color: var(--link-color);
+    text-decoration: none;
+}
+a:visited {
+    color: var(--link-color);
+}
+a:hover {
+    color: var(--link-hover-color);
+    text-decoration: underline;
+}
+a:active {
+    color: var(--link-color);
+}
+
+/* Headings */
+h1 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin: 0.67em 0;
+}
+h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0.83em 0;
+}
+h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 1em 0;
+}
+h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 1.33em 0;
+}
+
+/* Horizontal rule */
+hr {
+    border: none;
+    border-top: 1px solid var(--hr-border);
+    margin: 1rem 0;
+}
+
+/* ----------------------------------------------------------------------
+   3. TABLES (class tables, constant tables, etc.)
+   ---------------------------------------------------------------------- */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 1rem 0;
+    background-color: var(--body-background);
+    color: var(--body-color);
+}
+th, td {
+    border: 1px solid var(--table-border-color);
+    padding: 0.5rem;
+    text-align: left;
+    vertical-align: top;
+}
+th {
+    background-color: var(--th-background);
+    font-weight: 600;
+}
+th a:link, th a:visited {
+    color: var(--link-color);
+}
+td a:link, td a:visited {
+    color: var(--link-color);
+}
+
+/* ----------------------------------------------------------------------
+   4. CODE BLOCKS & INLINE CODE
+   ---------------------------------------------------------------------- */
+pre {
+    background-color: var(--pre-background);
+    border: 1px solid var(--pre-border);
+    border-radius: 6px;
+    color: var(--pre-color);
+    font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', monospace;
+    font-size: 0.875rem;
+    line-height: 1.4;
+    margin: 1rem 0;
+    overflow-x: auto;
+    padding: 0.75rem;
+}
+code {
+    font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', monospace;
+    font-size: 0.875rem;
+    background-color: var(--cc-surface);
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+    color: var(--code-fg);
+}
+pre code {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    font-size: inherit;
+}
+
+/* ----------------------------------------------------------------------
+   5. JAVADOC SPECIFIC ELEMENTS
+   ---------------------------------------------------------------------- */
+/* Blockquote – used for “Note:” etc. */
+blockquote {
+    background-color: var(--cc-blockquote-bg);
+    border-left: 4px solid var(--cc-primary);
+    margin: 1rem 0;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+}
+
+/* Deprecated text */
+.deprecated-label, .deprecated-padding {
+    color: var(--st-failure);
+    font-weight: 600;
+}
+.deprecated-content {
+    background-color: var(--cc-blockquote-bg);
+    border-left: 4px solid var(--st-failure);
+    margin: 0.5rem 0;
+    padding: 0.5rem;
+}
+
+/* Skip navigation link */
+.skip-nav {
+    position: absolute;
+    left: -10000px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+.skip-nav:focus {
+    left: 0;
+    top: 0;
+    width: auto;
+    height: auto;
+    background-color: var(--cc-surface);
+    border: 1px solid var(--cc-border);
+    padding: 0.5rem;
+    z-index: 1000;
+}
+
+/* ----------------------------------------------------------------------
+   6. LEFT FRAME (INDEX / PACKAGE LIST)
+   ---------------------------------------------------------------------- */
+iframe {
+    border: none;
+    background-color: var(--body-background);
+}
+/* The left frame’s content – modern Javadoc generates it as HTML, not a
+   separate stylesheet; we style it via the top‑level body. */
+
+/* ----------------------------------------------------------------------
+   7. SEARCH (the search bar and results)
+   ---------------------------------------------------------------------- */
+/* Search container */
+.ui-widget {
+    font-size: 1rem;
+}
+.ui-widget input, .ui-widget select, .ui-widget textarea, .ui-widget button {
+    font-family: inherit;
+    font-size: 1rem;
+}
+/* Search input box */
+#search {
+    background-color: var(--search-background);
+    border: 1px solid var(--search-border);
+    border-radius: 4px;
+    color: var(--search-text);
+    padding: 0.3rem 0.5rem;
+}
+#search:focus {
+    outline: 2px solid var(--search-focus-outline);
+    outline-offset: 2px;
+}
+/* Search results panel */
+.ui-menu .ui-menu-item {
+    background-color: var(--cc-surface);
+    border-bottom: 1px solid var(--cc-border);
+    color: var(--cc-text);
+    font-size: 0.875rem;
+}
+.ui-menu .ui-menu-item a {
+    color: var(--link-color);
+}
+.ui-menu .ui-menu-item a:hover {
+    background-color: var(--cc-primary-10);
+    color: var(--link-hover-color);
+}
+
+/* ----------------------------------------------------------------------
+   8. RESPONSIVE UTILITIES
+   Mimic the skin’s container behaviour.
+   ---------------------------------------------------------------------- */
+.container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+/* For smaller screens – adjust container padding */
+@media (max-width: 640px) {
+    .container {
+        padding: 0 1rem;
+    }
+    pre {
+        font-size: 0.75rem;
+    }
+    code {
+        font-size: 0.75rem;
+    }
+}
