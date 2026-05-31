@@ -17,7 +17,7 @@
 #*  *##set( $cleanDesc = $project.description.replaceAll('[\r\n]+', ' ').replace('"', '').trim() )
     <meta name="description" content="$cleanDesc"/>
 #**##end
-    <link rel="stylesheet" href="$relativePath/css/custom.css" type="text/css" media="all"/>
+    <link rel="stylesheet" href="$relativePath/css/stylesheet.css" type="text/css" media="all"/>
 #foreach( $author in $authors )
     <meta name="author" content="$author"/>
 #end
