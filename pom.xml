@@ -12,6 +12,7 @@
     <packaging>jar</packaging>
     <description>Maven site blog-like skin for verron.pro domain</description>
     <url>https://maven-skin.verron.pro</url>
+    <inceptionYear>2026</inceptionYear>
 
     <developers>
         <developer>
