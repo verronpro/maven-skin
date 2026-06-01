@@ -157,10 +157,6 @@
                     <version>3.4.0</version>
                 </plugin>
                 <plugin>
-                    <artifactId>maven-site-plugin</artifactId>
-                    <version>3.12.1</version>
-                </plugin>
-                <plugin>
                     <artifactId>maven-invoker-plugin</artifactId>
                     <version>3.7.0</version>
                 </plugin>
