@@ -7,7 +7,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>pro.verron</groupId>
     <artifactId>maven-skin</artifactId>
-    <version>1.0.9-SNAPSHOT</version>
+    <version>1.0.10-SNAPSHOT</version>
     <name>Verron.pro Maven Skin</name>
     <packaging>jar</packaging>
     <description>Maven site blog-like skin for verron.pro domain</description>
