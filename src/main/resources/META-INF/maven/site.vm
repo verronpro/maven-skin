@@ -6,7 +6,7 @@
 #if( $docRenderingContext.generator ) $docRenderingContext.generator#end##
 #if( $docRenderingContext.doxiaSource ) $docRenderingContext.doxiaSourcePath#end##
 #end
- at $dateFormat.format( $currentDate ) -->
+ at ${date} -->
 <html#if ( $locale ) lang="$locale.language"#end>
   <head>
     <meta charset="${outputEncoding}"/>

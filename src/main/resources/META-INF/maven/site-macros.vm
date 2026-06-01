@@ -152,9 +152,9 @@
 #**##set ( $hasVersion = ( $decoration.version && $decoration.version.position && !$decoration.version.position.equalsIgnoreCase( "none" ) ) )
 #**##if ( $hasPublish || $hasVersion )
 #*  *##if ( $publishDate )
-#*    *##set ( $renderedDate = $dateFormat.format( $publishDate ) )
+#*    *##set ( $renderedDate = $publishDate ) )
 #*  *##else
-#*    *##set ( $renderedDate = $dateFormat.format( $currentDate ) )
+#*    *##set ( $renderedDate = $date ) )
 #*  *##end
         <div class="card sidebar-meta">
           <h3>Project</h3>
@@ -163,7 +163,8 @@
             <li><span class="muted">Version:</span> <span id="projectVersion">${project.version}</span></li>
 #*  *##end
 #*  *##if ( $hasPublish )
-            <li><span class="muted">Last published:</span> <span id="publishDate">$renderedDate</span></li>
+            <li><span class="muted">Last published:</span> <span
+                    id="publishDate">${renderedDate}</span></li>
 #*  *##end
           </ul>
         </div>
@@ -177,8 +178,8 @@
 #*  *##else
 #*    *##set ( $period = "." )
 #*  *##end
-#*  *##set ( $currentYear = ${currentDate.year} + 1900 )
-#*  *##if ( ${project.inceptionYear} && ( ${project.inceptionYear} != ${currentYear.toString()} ) )
+#*  *##set ( $currentYear = $date.getYear() )
+#*  *##if ( ${project.inceptionYear} && ( ${project.inceptionYear} != ${currentYear}))
       ${project.inceptionYear}&#x2013;${currentYear}${period}##
 #*  *##else
       ${currentYear}${period}##
