@@ -1,26 +1,25 @@
+// suppress inspection "AsciiDocLinkResolve" for whole file
+:ghos: https://github.com/verronpro/maven-skin
+:docs: https://maven-skin.verron.pro
+:blog: https://verron.pro
+
 = Maven Skin
-:toc:
 
 A modern, tech-blog styled Maven site skin for open-source projects.
+It provides a clean aesthetic, automatic dark/light mode, and is optimized for AsciiDoc-based technical documentation.
 
-image::https://img.shields.io/badge/License-MIT-yellow.svg[MIT License]
-image::https://img.shields.io/badge/Maven-3.9+-blue.svg[Maven 3.9+]
-image::https://img.shields.io/badge/Java-21+-blue.svg[Java 21+]
+== Key Features
 
-== Features
-
-🎨 **Modern Design** - Clean, tech-blog aesthetic
-🌓 **Dark/Light Mode** - Automatic theme switching
-📱 **Fully Responsive** - Beautiful on all devices
-📄 **AsciiDoc First** - Perfect for technical documentation
-🎯 **Automated TOC** - Table of contents generation
-⚡ **Fast & Lightweight** - Minimal dependencies
-🔧 **Configurable** - Customize colors and elements
-🌐 **SEO Ready** - Automatic sitemap generation
+* **Modern Design**: Clean, tech-blog aesthetic with high readability.
+* **Dark/Light Mode**: Automatic theme switching based on system settings.
+* **Fully Responsive**: Optimized for all devices, from desktop to mobile.
+* **AsciiDoc First**: Enhanced styling for AsciiDoc elements and blocks.
+* **Automated TOC**: Easy-to-use table of contents generation.
+* **SEO Ready**: Support for sitemap generation and metadata.
 
 == Quick Start
 
-Install Maven Skin in your `pom.xml`:
+Add Maven Skin to your `src/site/site.xml`:
 
 [source,xml]
 ----
@@ -31,60 +30,29 @@ Install Maven Skin in your `pom.xml`:
 </skin>
 ----
 
-Generate your site:
+== Maven Coordinates
 
-[source,bash]
+[source,xml]
 ----
-mvn site
+<dependency>
+    <groupId>pro.verron</groupId>
+    <artifactId>maven-skin</artifactId>
+    <version>${project.version}</version>
+</dependency>
 ----
-
-Open `target/site/index.html` in your browser.
-
-For detailed instructions, see the link:getting-started.html[Getting Started] guide.
 
 == Documentation
 
-* link:getting-started.html[Getting Started] - 5-minute quick start
-* link:installation.html[Installation Guide] - Detailed setup instructions
-* link:examples.html[Examples & Best Practices] - Real-world usage patterns
+For detailed installation and configuration instructions, see the {docs}[Official Documentation].
 
-== Live Examples
+* link:{docs}/getting-started.html[Getting Started]
+* link:{docs}/installation.html[Installation Guide]
+* link:{docs}/examples.html[Examples & Best Practices]
 
-* https://office-stamper.verron.pro[Office-Stamper] - Template engine using Maven Skin
-* https://verron.pro[Verron.pro Blog] - Compatible Jekyll styling
+== Author
 
-== Requirements
-
-* **Maven 3.9+** (latest version recommended)
-* **Java 21+**
-* Modern web browser (CSS Grid, Flexbox support)
+Joseph Verron - {blog}/about.html[About Me]
 
 == License
 
-MIT License - See link:LICENSE[LICENSE] file for details.
-
-== Support
-
-* 📧 Email: joseph@verron.pro
-* 🐛 Issues: https://github.com/verronpro/maven-skin/issues
-* 💬 Discussions: https://github.com/verronpro/maven-skin/discussions
-
-== Development
-
-Maven Skin is open-source and welcomes contributions!
-
-* 🔧 Contribute: https://github.com/verronpro/maven-skin
-* 📝 Contributing Guide: https://github.com/verronpro/maven-skin/blob/main/CONTRIBUTING.md
-
-== Project Status
-
-✅ Modern theme with dark/light mode
-✅ Responsive design for all devices
-✅ AsciiDoc integration
-✅ GitHub Pages deployment
-🔄 Configurable colors (in progress)
-📋 Pluggable UI elements (planned)
-
----
-
-Made with ❤️ by https://verron.pro[Verron.pro]
+MIT License
