@@ -6,13 +6,13 @@
 #*
  * Renders the main table of contents container
  * This macro outputs the outer div that will contain the TOC
- * 
+ *
  * Usage: #renderTableOfContents()
  *#
 #macro( renderTableOfContents )
 <div class="toc-container" id="toc">
-  <h3 class="toc-title">Table of Contents</h3>
-  <!-- TOC will be generated here by JavaScript -->
+    <h3 class="toc-title">Table of Contents</h3>
+    <!-- TOC will be generated here by JavaScript -->
 </div>
 #end
 
@@ -34,38 +34,40 @@
  *#
 #macro( initializeTableOfContents $options )
 <script type="application/javascript">
-(function() {
-  // Configuration from template
-  var config = {
-    #if( $options && $options.headingSelector )
-    headingSelector: '$options.headingSelector',
-    #end
-    #if( $options && $options.containerSelector )
-    containerSelector: '$options.containerSelector',
-    #end
-    #if( $options && $options.minHeadings )
-    minHeadings: $options.minHeadings,
-    #end
-    #if( $options && $options.smoothScroll != false )
-    smoothScroll: #if( $options.smoothScroll == false )false#else true#end,
-    #end
-    #if( $options && $options.highlightActiveSection != false )
-    highlightActiveSection: #if( $options.highlightActiveSection == false )false#else true#end
-    #end
-  };
+    (function () {
+        // Configuration from template
+        const config = {
+            #if( $options && $options.headingSelector )
+                headingSelector: '$options.headingSelector',
+            #end
+            #if( $options && $options.containerSelector )
+                containerSelector: '$options.containerSelector',
+            #end
+            #if( $options && $options.minHeadings )
+                minHeadings: $options.minHeadings,
+            #end
+            #if( $options && $options.smoothScroll != false )
+            smoothScroll: #if( $options.smoothScroll == false )false#else
+                true#end,
+            #end
+            #if( $options && $options.highlightActiveSection != false )
+            highlightActiveSection: #if( $options.highlightActiveSection == false )false#else
+                true#end
+            #end
+        };
 
-  // Initialize TOC Generator when available
-  if (typeof TOCGenerator !== 'undefined') {
-    TOCGenerator.init(config);
-  } else {
-    // Wait for script to load if not immediately available
-    document.addEventListener('DOMContentLoaded', function() {
-      if (typeof TOCGenerator !== 'undefined') {
-        TOCGenerator.init(config);
-      }
-    });
-  }
-})();
+        // Initialize TOC Generator when available
+        if (typeof TOCGenerator !== 'undefined') {
+            TOCGenerator.init(config);
+        } else {
+            // Wait for script to load if not immediately available
+            document.addEventListener('DOMContentLoaded', function () {
+                if (typeof TOCGenerator !== 'undefined') {
+                    TOCGenerator.init(config);
+                }
+            });
+        }
+    })();
 </script>
 #end
 
@@ -80,8 +82,8 @@
  * Or:    #setupTableOfContents({'minHeadings': 2})
  *#
 #macro( setupTableOfContents $config )
-#renderTableOfContents()
-#initializeTableOfContents( $config )
+    #renderTableOfContents()
+    #initializeTableOfContents( $config )
 #end
 
 #*
@@ -96,15 +98,15 @@
  *#
 #macro( conditionalTableOfContents $minCount $config )
 <script type="application/javascript">
-(function() {
-  // Count headings
-  var headings = document.querySelectorAll('h2, h3, h4, h5, h6');
-  var minRequired = $minCount || 3;
-  
-  if (headings.length >= minRequired) {
-    #setupTableOfContents( $config )
-  }
-})();
+    (function () {
+        // Count headings
+        const headings = document.querySelectorAll('h2, h3, h4, h5, h6');
+        const minRequired = $minCount || 3;
+
+        if (headings.length >= minRequired) {
+            #setupTableOfContents( $config )
+        }
+    })();
 </script>
 #end
 
@@ -121,8 +123,8 @@
  *#
 #macro( renderTOCList $headings )
 <ul class="toc-list">
-#foreach( $heading in $headings )
-  <li><a href="#$heading.id" class="toc-link">$heading.text</a></li>
-#end
+    #foreach( $heading in $headings )
+        <li><a href="#$heading.id" class="toc-link">$heading.text</a></li>
+    #end
 </ul>
 #end

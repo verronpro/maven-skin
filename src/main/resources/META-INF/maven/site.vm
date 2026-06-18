@@ -13,10 +13,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <title>$title</title>
-#**##if( $project.description )
-#*  *##set( $cleanDesc = $project.description.replaceAll('[\r\n]+', ' ').replace('"', '').trim() )
+    #if( $project.description )
+      #set( $cleanDesc = $project.description.replaceAll('[\r\n]+', ' ').replace('"', '').trim() )
     <meta name="description" content="$cleanDesc"/>
-#**##end
+    #end
     <link rel="stylesheet" href="$relativePath/css/stylesheet.css" type="text/css" media="all"/>
 #foreach( $author in $authors )
     <meta name="author" content="$author"/>
@@ -32,14 +32,14 @@
     <link rel="icon" href="$relativePath/$faviconEl.getValue()"/>
 #end
 #if( $decoration.body.head )
-#**#$render.eval( $decoration.body.head )
+    $render.eval( $decoration.body.head )
 #end
     $!headContent
-#**##googleAnalytics()
-#**##ahrefsAnalytics()
-#**##diagramScripts()
+    #googleAnalytics()
+    #ahrefsAnalytics()
+    #diagramScripts()
       <script defer src="$relativePath/js/toc-generator.js"></script>
-#**##openGraph()
+    #openGraph()
   </head>
   <body class="layout-doc">
     <a class="skip-link" href="#main">Skip to content</a>
@@ -48,16 +48,17 @@
         <a class="site-header__brand" href="$relativePath/index.html">
 #set( $logoEl = $decoration.custom.getChild( 'logo' ) )
 #if( $logoEl )
-#*    *##set( $logoSrc = $logoEl.getValue() )
-#*    *##if( !$decoration.isLink( $logoSrc ) )
-#*      *##set( $logoSrc = $PathTool.calculateLink( $logoSrc, $relativePath ).replaceAll( '\\', '/' ) )
-#*    *##end
+        #set( $logoSrc = $logoEl.getValue() )
+        #if( !$decoration.isLink( $logoSrc ) )
+          #set( $logoSrc = $PathTool.calculateLink( $logoSrc, $relativePath )
+ .replaceAll( '\\', '/' ) )
+        #end
           <span class="logo" aria-hidden="true"><img src="$logoSrc" alt=""/></span>
 #elseif( $decoration.bannerLeft && $decoration.bannerLeft.src )
-#*    *##set( $bSrc = $decoration.bannerLeft.src )
-#*    *##if( !$decoration.isLink( $bSrc ) )
-#*      *##set( $bSrc = $PathTool.calculateLink( $bSrc, $relativePath ).replaceAll( '\\', '/' ) )
-#*    *##end
+        #set( $bSrc = $decoration.bannerLeft.src )
+        #if( !$decoration.isLink( $bSrc ) )
+          #set( $bSrc = $PathTool.calculateLink( $bSrc, $relativePath ).replaceAll( '\\', '/' ) )
+        #end
           <span class="logo" aria-hidden="true"><img src="$bSrc" alt=""/></span>
 #end
           <span>#if( $decoration.bannerLeft && $decoration.bannerLeft.name )$decoration.bannerLeft.name#else$project.name#end</span>
@@ -77,9 +78,9 @@
 
       <div class="home-grid">
         <article class="home-main post-content">
-#*   *#$bodyContent
+       $bodyContent
 #if( $decoration.edit && $docRenderingContext.editable )
-#**##set( $editUrl = $docRenderingContext.getDoxiaSourcePath( $decoration.edit ).replaceFirst( "\.git/", "/blob/main/" ) )
+    #set( $editUrl = $docRenderingContext.getDoxiaSourcePath( $decoration.edit ).replaceFirst( "\.git/", "/blob/main/" ) )
           <div class="post-edit-link">
             <a href="$editUrl">Edit this page</a>
           </div>
