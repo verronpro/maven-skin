@@ -56,7 +56,7 @@ For a project with a single `pom.xml`:
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
          http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
@@ -78,7 +78,7 @@ For a project with a single `pom.xml`:
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-site-plugin</artifactId>
-        <version>3.21.0</version>
+        <version>3.22.0</version>
       </plugin>
     </plugins>
   </build>
@@ -94,7 +94,7 @@ For projects with multiple modules, add the skin to the parent `pom.xml`:
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
          http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
@@ -122,7 +122,7 @@ For projects with multiple modules, add the skin to the parent `pom.xml`:
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-site-plugin</artifactId>
-        <version>3.21.0</version>
+        <version>3.22.0</version>
       </plugin>
     </plugins>
   </build>
@@ -140,7 +140,7 @@ Create `src/site/site.xml` to configure your site's navigation:
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="My Project" xmlns="http://maven.apache.org/DECORATION/1.8.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/DECORATION/1.8.0 
+         xsi:schemaLocation="http://maven.apache.org/DECORATION/1.8.0
          http://maven.apache.org/xsd/decoration-1.8.0.xsd">
 
   <body>
@@ -168,7 +168,7 @@ Add this to your `pom.xml` `<build><plugins>` section:
 <plugin>
   <groupId>org.apache.maven.plugins</groupId>
   <artifactId>maven-site-plugin</artifactId>
-  <version>3.21.0</version>
+  <version>3.22.0</version>
   <configuration>
     <generateSitemap>true</generateSitemap>
     <asciidoc>

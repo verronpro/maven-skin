@@ -3,14 +3,14 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-
     <modelVersion>4.0.0</modelVersion>
+
+    <name>Verron.pro Maven Skin</name>
     <groupId>pro.verron</groupId>
     <artifactId>maven-skin</artifactId>
     <version>1.0.10-SNAPSHOT</version>
-    <name>Verron.pro Maven Skin</name>
-    <packaging>jar</packaging>
     <description>Maven site blog-like skin for verron.pro domain</description>
+    <packaging>jar</packaging>
     <url>https://maven-skin.verron.pro</url>
     <inceptionYear>2026</inceptionYear>
 

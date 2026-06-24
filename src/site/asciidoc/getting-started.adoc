@@ -41,7 +41,7 @@ Your pom.xml should now look similar to:
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
          http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
@@ -131,7 +131,7 @@ Create or edit `src/site/site.xml` to customize navigation:
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="My Project" xmlns="http://maven.apache.org/DECORATION/1.8.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/DECORATION/1.8.0 
+         xsi:schemaLocation="http://maven.apache.org/DECORATION/1.8.0
          http://maven.apache.org/xsd/decoration-1.8.0.xsd">
 
   <body>
@@ -171,7 +171,7 @@ Try running: `mvn help:describe -Dgroupid=pro.verron -Dartifactid=maven-skin`
 
 **Problem**: Your site appears without the modern theme.
 
-**Solution**: 
+**Solution**:
 * Try deleting the `target` folder and running `mvn clean site` again
 * Clear your browser cache (Ctrl+Shift+Delete or Cmd+Shift+Delete)
 * Try a different browser
