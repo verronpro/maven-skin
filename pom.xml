@@ -14,6 +14,15 @@
     <url>https://maven-skin.verron.pro</url>
     <inceptionYear>2026</inceptionYear>
 
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.report.outputEncoding>UTF-8</project.report.outputEncoding>
+
+        <maven.compiler.release>25</maven.compiler.release>
+        <maven.compiler.source>25</maven.compiler.source>
+        <maven.compiler.target>25</maven.compiler.target>
+    </properties>
+
     <developers>
         <developer>
             <email>joseph@verron.pro</email>
@@ -45,14 +54,6 @@
             <url>LICENSE</url>
         </license>
     </licenses>
-
-    <properties>
-        <maven.compiler.release>25</maven.compiler.release>
-        <maven.compiler.source>25</maven.compiler.source>
-        <maven.compiler.target>25</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.report.outputEncoding>UTF-8</project.report.outputEncoding>
-    </properties>
 
     <distributionManagement>
         <site>

@@ -8,7 +8,7 @@ Detailed installation and configuration guide for Maven Skin.
 
 === Mandatory
 * **Maven**: 3.9+ (latest recommended)
-* **Java**: 21+ (LTS version recommended)
+* **Java**: 25 (latest recommended)
 * **Modern Web Browser**: Chrome, Firefox, Safari, or Edge (for viewing generated site)
 
 === Optional
@@ -39,7 +39,7 @@ java --version
 Expected output:
 [source]
 ----
-java 21.x (or later)
+java 25.x (or later)
 ...
 ----
 

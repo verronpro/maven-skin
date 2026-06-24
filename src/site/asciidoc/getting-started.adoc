@@ -9,7 +9,7 @@ Get your Maven site running with Maven Skin in just 5 minutes!
 Before you start, make sure you have:
 
 * **Maven 3.9 or later** - Check with `mvn --version`
-* **Java 21 or later** - Check with `java --version`
+* **Java 25 or later** - Check with `java --version`
 * A Maven project with a `pom.xml` file
 * A modern web browser (Chrome, Firefox, Safari, Edge)
 
