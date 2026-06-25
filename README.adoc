@@ -1,32 +1,40 @@
 // suppress inspection "AsciiDocLinkResolve" for whole file
 :ghos: https://github.com/verronpro/maven-skin
+:wrkf: {ghos}/actions/workflows
 :docs: https://maven-skin.verron.pro
 :blog: https://verron.pro
 
 = Maven Skin
 
+image:{wrkf}/release.yml/badge.svg[Release Status, link={wrkf}/release.yml]
+image:{wrkf}/pages.yml/badge.svg[Documentation Status, link={wrkf}/pages.yml]
+
+== Introduction
+
 A modern, tech-blog styled Maven site skin for open-source projects.
 It provides a clean aesthetic, automatic dark/light mode, and is optimized for AsciiDoc-based technical documentation.
+
+This skin is used across all Verron.pro projects to ensure a consistent and professional look for generated documentation sites.
 
 == Key Features
 
 * **Modern Design**: Clean, tech-blog aesthetic with high readability.
 * **Dark/Light Mode**: Automatic theme switching based on system settings.
 * **Fully Responsive**: Optimized for all devices, from desktop to mobile.
-* **AsciiDoc First**: Enhanced styling for AsciiDoc elements and blocks.
+* **AsciiDoc First**: Enhanced styling for AsciiDoc elements, source blocks, and admonitions.
 * **Automated TOC**: Easy-to-use table of contents generation.
-* **SEO Ready**: Support for sitemap generation and metadata.
+* **SEO Ready**: Optimized structure for search engines.
 
 == Quick Start
 
-Add Maven Skin to your `src/site/site.xml`:
+To use this skin in your Maven project, add it to your `src/site/site.xml`:
 
 [source,xml]
 ----
 <skin>
   <groupId>pro.verron</groupId>
   <artifactId>maven-skin</artifactId>
-  <version>1.0</version>
+  <version>1.0.9</version>
 </skin>
 ----
 
@@ -43,7 +51,7 @@ Add Maven Skin to your `src/site/site.xml`:
 
 == Documentation
 
-For detailed installation and configuration instructions, see the {docs}[Official Documentation].
+Comprehensive documentation, including installation and customization guides, is available at {docs}[{docs}].
 
 * link:{docs}/getting-started.html[Getting Started]
 * link:{docs}/installation.html[Installation Guide]
