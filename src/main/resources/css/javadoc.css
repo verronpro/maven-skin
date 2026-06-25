@@ -91,10 +91,10 @@
     --body-font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
     --block-font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
     --code-font-family: ui-monospace, 'SFMono-Regular', Menlo, Consolas, 'Liberation Mono', monospace;
-    --body-font-size: 14.2px;
-    --block-font-size: 14.4px;
+    --body-font-size: 14px;
+    --block-font-size: 14px;
     --code-font-size: 14px;
-    --nav-font-size: 13.4px;
+    --nav-font-size: 13px;
     --block-line-height: 1.5;
     --code-line-height: 1.6;
 }
