@@ -1,0 +1,17 @@
+= Tools and Resources
+
+== AsciiDoc Tools
+
+* https://asciidoctor.org/[Asciidoctor] - Official documentation
+* https://asciidoctor.org/docs/user-manual/[User Manual] - Complete reference
+* https://asciidoctor.org/docs/asciidoc-writers-guide/[Writer's Guide] - Best practices
+
+== Maven Resources
+
+* https://maven.apache.org/plugins/maven-site-plugin/[Maven Site Plugin]
+* https://maven.apache.org/guides/[Maven Guides]
+
+== Related Projects
+
+* https://office-stamper.verron.pro[Office-Stamper] - Document template engine
+* https://verron.pro[Verron.pro] - Blog with compatible styling

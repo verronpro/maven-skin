@@ -19,11 +19,11 @@ If you don't have Maven installed, download it from https://maven.apache.org/dow
 
 === Step 1: Open your pom.xml
 
-Locate your project's `pom.xml` file in your project root directory.
+Locate your project's `site.xml` file in your project `src/site` directory.
 
 === Step 2: Add the Maven Skin
 
-Inside the `<project>` element, add the skin configuration:
+Inside the `<site>` element, add the skin configuration:
 
 [source,xml]
 ----
@@ -39,24 +39,15 @@ Your pom.xml should now look similar to:
 [source,xml]
 ----
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
-         http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-
-  <groupId>com.example</groupId>
-  <artifactId>my-project</artifactId>
-  <version>1.0</version>
-  <name>My Project</name>
-  <description>My awesome project</description>
-
+<site xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      name="maven-skin"
+      xmlns="http://maven.apache.org/SITE/2.0.0"
+      xsi:schemaLocation="http://maven.apache.org/SITE/2.0.0 https://maven.apache.org/xsd/site-2.0.0.xsd">
   <skin>
     <groupId>pro.verron</groupId>
     <artifactId>maven-skin</artifactId>
-    <version>1.0</version>
   </skin>
-</project>
+</site>
 ----
 
 === Step 3: Generate Your Site
@@ -129,10 +120,14 @@ Create or edit `src/site/site.xml` to customize navigation:
 [source,xml]
 ----
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="My Project" xmlns="http://maven.apache.org/DECORATION/1.8.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/DECORATION/1.8.0
-         http://maven.apache.org/xsd/decoration-1.8.0.xsd">
+<site xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      name="maven-skin"
+      xmlns="http://maven.apache.org/SITE/2.0.0"
+      xsi:schemaLocation="http://maven.apache.org/SITE/2.0.0 https://maven.apache.org/xsd/site-2.0.0.xsd">
+  <skin>
+    <groupId>pro.verron</groupId>
+    <artifactId>maven-skin</artifactId>
+  </skin>
 
   <body>
     <menu name="Documentation">

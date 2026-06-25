@@ -6,8 +6,8 @@
 
 = Maven Skin
 
-image:{wrkf}/release.yml/badge.svg[Release Status, link={wrkf}/release.yml]
-image:{wrkf}/pages.yml/badge.svg[Documentation Status, link={wrkf}/pages.yml]
+image:{wrkf}/release.yml/badge.svg[Release Status,link={wrkf}/release.yml]
+image:{wrkf}/pages.yml/badge.svg[Documentation Status,link={wrkf}/pages.yml]
 
 == Introduction
 
@@ -22,7 +22,7 @@ This skin is used across all Verron.pro projects to ensure a consistent and prof
 * **Dark/Light Mode**: Automatic theme switching based on system settings.
 * **Fully Responsive**: Optimized for all devices, from desktop to mobile.
 * **AsciiDoc First**: Enhanced styling for AsciiDoc elements, source blocks, and admonitions.
-* **Automated TOC**: Easy-to-use table of contents generation.
+* **Automated TOC**: An easy-to-use table of contents generation.
 * **SEO Ready**: Optimized structure for search engines.
 
 == Quick Start
