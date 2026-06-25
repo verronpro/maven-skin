@@ -18,7 +18,7 @@
         <a href="$href"$linkClass$linkTarget$linkTitle>$name #image( $img $alt $border $width $height $title )</a>##
         #end
     #else
-      <a href="$href"$linkClass$linkTarget$linkTitle>$name</a>##
+    <a href="$href"$linkClass$linkTarget$linkTitle>$name</a>##
     #end
 #end
 
@@ -51,7 +51,7 @@
         #else
             #set ( $imgTitle = "" )
         #end
-      <img$imgSrc$imgAlt$imgWidth$imgHeight$imgTitle/>##
+    <img$imgSrc$imgAlt$imgWidth$imgHeight$imgTitle/>##
     #end
 #end
 
@@ -122,10 +122,10 @@
 
     #if ( $alignedFileName == $currentItemHref )
 
-      <li class="$collapse active"><span class="active-link">$item.name</span>##
+    <li class="$collapse active"><span class="active-link">$item.name</span>##
     #else
 
-      <li class="$collapse">#link( $currentItemHref $item.name $item.target $item.img $item.position $item.alt $item.border $item.width $item.height $item.title )##
+    <li class="$collapse">#link( $currentItemHref $item.name $item.target $item.img $item.position $item.alt $item.border $item.width $item.height $item.title )##
     #end
     #if ( $item && $item.items && $item.items.size() > 0 && $collapse ==
         "expanded" )
@@ -162,9 +162,9 @@
         "none" ) ) )
     #if ( $hasPublish || $hasVersion )
         #if ( $publishDate )
-            #set ( $renderedDate = $publishDate ) )
+            #set ( $renderedDate = $publishDate )
         #else
-            #set ( $renderedDate = $date ) )
+            #set ( $renderedDate = $date )
         #end
     <div class="card sidebar-meta">
         <h3>Project</h3>
