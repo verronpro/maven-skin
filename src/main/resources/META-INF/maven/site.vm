@@ -10,6 +10,12 @@
 <html#if ( $locale ) lang="$locale.language"#end>
 <head>
     <meta charset="$outputEncoding"/>
+    <script>
+        (function () {
+            const theme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+            document.documentElement.setAttribute('data-theme', theme);
+        })();
+    </script>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <title>$title</title>
@@ -69,6 +75,14 @@
         </a>
         <nav class="site-header__nav" aria-label="Primary">
             #headerLinks( $decoration.body.links )
+            <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Toggle theme">
+                <svg class="sun-icon" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.99 4.58a.996.996 0 00-1.41 0 .996.996 0 000 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41L5.99 4.58zm12.37 12.37a.996.996 0 00-1.41 0 .996.996 0 000 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41l-1.06-1.06zm1.06-10.96a.996.996 0 000-1.41.996.996 0 00-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06zM7.05 18.36a.996.996 0 000-1.41.996.996 0 00-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06z"/>
+                </svg>
+                <svg class="moon-icon" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M12.12 22a9.66 9.66 0 001.57-.15 9.64 9.64 0 01-3.62-12.89A9.63 9.63 0 0118.39 4c.58 0 1.14.06 1.69.17A9.65 9.65 0 0012.12 2z"/>
+                </svg>
+            </button>
         </nav>
     </div>
 </header>
@@ -129,6 +143,17 @@
     document.querySelectorAll('table.bodyTable[style]').forEach(function (t) {
         t.removeAttribute('style');
     });
+
+    /* Theme toggle logic */
+    const themeToggle = document.getElementById('theme-toggle');
+    if (themeToggle) {
+        themeToggle.addEventListener('click', function () {
+            const currentTheme = document.documentElement.getAttribute('data-theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+        });
+    }
 </script>
 </body>
 </html>
