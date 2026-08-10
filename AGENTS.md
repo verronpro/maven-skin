@@ -37,7 +37,7 @@ This project uses **Java 25** and **Maven**.
 
 - Changes here affect the look of the `mvn site` output of any project that uses this skin.
   Verify with `mvn site` after editing.
-- The skin's TOC feature is documented in `TOC-README.md`, `TOC-FEATURE.md`, and `TOC-EXAMPLE.html`
-  at this project root — these are the canonical references for the TOC behaviour; surface them in
-  the skin site rather than leaving them orphaned.
+- The skin's TOC feature is documented in the site (`src/site/asciidoc/toc.adoc` → "Table of Contents",
+  and the live `src/site/resources/toc-example.html` → "TOC Example"). These are the canonical TOC
+  references; edit them in the site, not as orphaned root files.
 - Keep styling consistent with common web design tokens where they overlap.
